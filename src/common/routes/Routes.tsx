@@ -6,11 +6,11 @@ import { CheckEmail } from "../components/CheckEmail"
 import { ForgotPassword } from "../components/ForgotPassword"
 import { NewPasword } from "../components/NewPassword"
 import { Profile } from "../components/Profile"
-import { Registration } from "../components/registration/Registration"
+import { Registration } from "../../features/auth/registration/Registration"
 import { Cards } from "../../features/cards/components/Cards"
 import { Packs } from "../../features/packs/components/packs/Packs"
 import { Learn } from "../../features/learn/components/Learn"
-import { Login } from "../components/Login"
+import { Login } from "../../features/auth/Login"
 
 export const router = createBrowserRouter([
   {

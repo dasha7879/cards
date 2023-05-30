@@ -1,16 +1,16 @@
-import { authThunks } from "../../../features/auth/auth.slice"
+import { authThunks } from "../auth.slice"
 import { useAppDispatch } from "../../../app/hooks"
 import s from "./registration.module.css"
 
 export const Registration = () => {
-  const dispatch = useAppDispatch()
 
+  const dispatch = useAppDispatch()
 
   const registerHandler = () => {
     dispatch(
       authThunks.register({
-        email: "Mik@nya.com",
-        password: "1qazxcvBG",
+        email: "MikhaSma@gmail.com",
+        password: "1qazxcvBG90",
       }),
     )
   }
