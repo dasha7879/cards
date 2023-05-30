@@ -1,16 +1,15 @@
 import { createBrowserRouter } from "react-router-dom"
 import { path } from "./paths"
 import App from "../../app/App"
-
-import { CheckEmail } from "../components/CheckEmail"
-import { ForgotPassword } from "../components/ForgotPassword"
-import { NewPasword } from "../components/NewPassword"
-import { Profile } from "../components/Profile"
+import { Profile } from "../../features/auth/Profile"
 import { Registration } from "../../features/auth/registration/Registration"
 import { Cards } from "../../features/cards/components/Cards"
 import { Packs } from "../../features/packs/components/packs/Packs"
 import { Learn } from "../../features/learn/components/Learn"
 import { Login } from "../../features/auth/Login"
+import { CheckEmail } from "../../features/auth/CheckEmail"
+import { NewPasword } from "../../features/auth/NewPassword"
+import { ForgotPassword } from "../../features/auth/ForgotPassword"
 
 export const router = createBrowserRouter([
   {

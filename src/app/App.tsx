@@ -3,6 +3,7 @@ import { Counter } from "../features/counter/Counter"
 import "./App.css"
 import { useAppDispatch, useAppSelector } from "./hooks"
 import { appActions } from "./appSlice"
+import { SuperButton } from "../common/components/SuperButton"
 
 function App() {
   const isLoading = useAppSelector((state) => state.app.isLoading)
@@ -20,6 +21,8 @@ function App() {
     <div className="App">
       {isLoading && <h1>Loader...</h1>}
       <Counter />
+      <SuperButton name={"BIG"} color="secondary" width="347px"/>
+      <SuperButton name={"SMALL"} color="primary" textColor="white" rounded  width="113px"/>
     </div>
   )
 }
