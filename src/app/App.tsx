@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "./hooks"
 import { appActions } from "./appSlice"
 import { SuperButton } from "../common/components/SuperButton"
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Header } from "../common/components/Header"
 
 function App() {
   const isLoading = useAppSelector((state) => state.app.isLoading)
@@ -20,8 +21,11 @@ function App() {
   
   return (
     <div className="App">
+       <Header/>
       {isLoading && <h1>Loader...</h1>}
-      <Counter />
+      {/* <Counter /> */}
+
+     
     </div>
   )
 }
