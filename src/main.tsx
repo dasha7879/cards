@@ -6,6 +6,7 @@ import "./index.css"
 import { RouterProvider } from "react-router-dom"
 import { router } from "./common/routes/Routes"
 import {createTheme, ThemeProvider} from '@mui/material';
+import { dark } from "@mui/material/styles/createPalette"
 
 
 const theme = createTheme({
@@ -14,7 +15,14 @@ const theme = createTheme({
       main: '#366EFF;'
     },
     secondary:{
-      main: '#white;'
+      main: '#FFFFFF;'
+    }
+  },
+  typography:{
+    h1:{
+  fontFamily: 'Montserrat',
+  fontWeight: 600,
+  fontSize: 26
     }
   },
   shape:{borderRadius: 2}

@@ -3,8 +3,6 @@ import { Counter } from "../features/counter/Counter"
 import "./App.css"
 import { useAppDispatch, useAppSelector } from "./hooks"
 import { appActions } from "./appSlice"
-import { SuperButton } from "../common/components/SuperButton"
-import DeleteIcon from '@mui/icons-material/Delete';
 import { Header } from "../common/components/Header"
 
 function App() {
@@ -20,11 +18,11 @@ function App() {
 
   
   return (
-    <div className="App">
+    <div>
        <Header/>
       {isLoading && <h1>Loader...</h1>}
       {/* <Counter /> */}
-
+      {/* <Form/> */}
      
     </div>
   )
