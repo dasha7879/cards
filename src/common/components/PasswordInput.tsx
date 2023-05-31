@@ -5,8 +5,8 @@ import Input from "@mui/material/Input"
 import InputAdornment from "@mui/material/InputAdornment"
 import InputLabel from "@mui/material/InputLabel"
 import { useState } from "react"
-
-export const Password = () => {
+export type PasswordInputType = any
+export const Password:React.FC<PasswordInputType> = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   const handleClickShowPassword = () => setShowPassword((show) => !show)
