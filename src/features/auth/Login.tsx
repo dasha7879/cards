@@ -79,9 +79,10 @@ export const Login = () => {
     )
   }
 
+
   const paperStyle = {
     padding: 33,
-    height: "50vh",
+    height: "62vh",
     width: 413,
     margin: "20px auto",
   }
@@ -101,12 +102,14 @@ export const Login = () => {
     },
   })
 
+
+
   const onSubmit = handleSubmit((data) => console.log(data))
 
   return (
     <>
       <Header />
-      <Grid>
+      <Grid container>
         <Paper elevation={10} style={paperStyle}>
           <Typography variant="h1" textAlign={"center"}>
             Sign In
