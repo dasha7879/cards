@@ -82,7 +82,7 @@ export const Login = () => {
 
   const paperStyle = {
     padding: 33,
-    height: "62vh",
+    height: "55vh",
     width: 413,
     margin: "20px auto",
   }
