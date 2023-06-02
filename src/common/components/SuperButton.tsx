@@ -1,39 +1,42 @@
 import { Button } from "@mui/material"
-import React from "react"
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react"
 
-type SuperButtonPropsType = {
+type SuperButtonPropsType =  {
   width: string
   borderRadius?: string
   color?: "primary" | "secondary"
   text: string
   startIcon?: any
+  type?:'submit'
   onClick?: () => void
 }
 
 export const SuperButton: React.FC<SuperButtonPropsType> = ({
   width,
   borderRadius,
-  color = "primary",
+  color ,
   text,
   startIcon,
   onClick,
+  type
 }) => {
   const buttonStyle = {
     width: `${width}`,
     borderRadius: `${borderRadius}`,
   }
 
-  // const onClickCallBack = () => {
-  //   onClick()
-  // }
+  const onClickCallBack = () => {
+    onClick?.()
+  }
 
   return (
     <Button
       variant="contained"
-      color={color}
+      color={color || "primary"}
       sx={buttonStyle}
       startIcon={startIcon}
-      // onClick={onClickCallBack}
+      type={type || 'button'}
+      onClick={onClickCallBack}
     >
       {text}
     </Button>

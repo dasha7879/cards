@@ -6,10 +6,10 @@ import { Registration } from "../../features/auth/registration/Registration"
 import { Cards } from "../../features/cards/components/Cards"
 import { Packs } from "../../features/packs/components/packs/Packs"
 import { Learn } from "../../features/learn/components/Learn"
-import { Login } from "../../features/auth/Login"
 import { CheckEmail } from "../../features/auth/CheckEmail"
 import { NewPasword } from "../../features/auth/NewPassword"
 import { ForgotPassword } from "../../features/auth/ForgotPassword"
+import { Login } from "../../features/auth/Login"
 
 export const router = createBrowserRouter([
   {

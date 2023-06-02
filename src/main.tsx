@@ -2,11 +2,10 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { Provider } from "react-redux"
 import { store } from "./app/store"
-import "./index.css"
+// import "./index.css"
 import { RouterProvider } from "react-router-dom"
 import { router } from "./common/routes/Routes"
 import {createTheme, ThemeProvider} from '@mui/material';
-import { dark } from "@mui/material/styles/createPalette"
 
 
 const theme = createTheme({

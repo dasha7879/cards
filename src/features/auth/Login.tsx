@@ -2,8 +2,6 @@ import {
   Box,
   Grid,
   Paper,
-  TextField,
-  styled,
   Stack,
   Typography,
   Checkbox,
@@ -16,55 +14,11 @@ import { authThunks } from "./auth.slice"
 import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton.js"
 
-type FormData = {
+export type FormData = {
   email: string
   password: string
-  checkbox: boolean
+  rememberMe: boolean
 }
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: 'center',
-//   color: theme.palette.text.secondary,
-// }));
-
-// export const Login = () => {
-//
-
-//   return (
-//     <Box
-//       sx={{
-//         display: "flex",
-//         flexWrap: "wrap",
-//         "& > :not(style)": {
-//           m: 1,
-//           width: 413,
-//           height: 552,
-//         },
-//       }}
-//     >
-//       <form onSubmit={onSubmit}>
-//         <label>email</label>
-//         <input aria-label="email" type="text" {...register("email")} />
-//         <label>password</label>
-//         <input aria-label="Password" type="text" {...register("password")} />
-//         <Controller
-//           name="checkbox"
-//           control={control}
-//           rules={{ required: true }}
-//           render={({ field }) => <Checkbox {...field} />}
-//         />
-//         <span style={{ color: "white" }}>Remember me</span>
-//         <div style={{ color: "white" }}>Forot password</div>
-//         <input onClick={loginHandler} type="submit" value={"Sign In"} />
-//         <div style={{ color: "white" }}>Don't have account</div>
-//         <a href="#">Sign Up</a>
-//       </form>
-//     </Box>
-//   )
-// }
 
 export const Login = () => {
   const dispatch = useAppDispatch()
@@ -79,17 +33,14 @@ export const Login = () => {
     )
   }
 
-
   const paperStyle = {
     padding: 33,
-    height: "55vh",
+    minHeight: "55vh",
+    maxHeigth: "60vh",
     width: 413,
     margin: "20px auto",
   }
 
-  const defaultValues = {
-    AntdCheckbox: true,
-  }
   const {
     register,
     setValue,
@@ -98,13 +49,15 @@ export const Login = () => {
     control,
   } = useForm<FormData>({
     defaultValues: {
-      checkbox: false,
+      email: "",
+      password: "",
+      rememberMe: false,
     },
   })
 
-
-
-  const onSubmit = handleSubmit((data) => console.log(data))
+  const onSubmit = (data: FormData) => {
+    console.log(data)
+  }
 
   return (
     <>
@@ -114,31 +67,36 @@ export const Login = () => {
           <Typography variant="h1" textAlign={"center"}>
             Sign In
           </Typography>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} width={400}>
-              <EmailInput {...register("email")} />
-              <Password {...register("password")} />
+              <EmailInput name="email" register={register} />
+              <Password name="password" register={register} />
             </Stack>
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
               <Controller
-                name="checkbox"
+                name="rememberMe"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => <Checkbox {...field} />}
               />
               <Typography variant="h6">Remember Me</Typography>
             </Box>
-            <Typography variant="h6" style={{ textAlign: "right" , padding: '25px 20px 77px 0'}}>
+            <Typography
+              variant="h6"
+              style={{ textAlign: "right", padding: "25px 20px 77px 0" }}
+            >
               Forgot the password?
             </Typography>
             <Stack spacing={3} alignItems="center">
-              <SuperButton width={"347px"} text={"Sign In"}  borderRadius="30px" onClick={loginHandler}/>
-              <Typography variant="h6" >
-              Don't have account?
-            </Typography>
-              <Typography variant="h6" >
-              <a href="#">Sign Up</a>
-            </Typography>
+              <SuperButton
+                width={"327"}
+                text={"Login"}
+                borderRadius="30px"
+                type="submit"
+              />
+              <Typography variant="h6">Don't have account?</Typography>
+              <Typography variant="h6">
+                <a href="#">Sign Up</a>
+              </Typography>
             </Stack>
           </form>
         </Paper>
