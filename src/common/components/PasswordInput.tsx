@@ -7,7 +7,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 
 type PasswordInputType = {
-  name: "password" | "confirmPassword"
+  name: "password" | "confirmPassword" | "newPassword"
   register: UseFormRegister<any>
   text: string
 }
