@@ -1,8 +1,8 @@
 import { Button } from "@mui/material"
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react"
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 type SuperButtonPropsType =  {
-  width: string
+  width?: string
   borderRadius?: string
   color?: "primary" | "secondary"
   text: string
@@ -37,6 +37,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
       startIcon={startIcon}
       type={type || 'button'}
       onClick={onClickCallBack}
+    
     >
       {text}
     </Button>

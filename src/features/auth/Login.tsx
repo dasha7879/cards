@@ -7,12 +7,12 @@ import {
   Checkbox,
 } from "@mui/material"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
-import { Header } from "../../common/components/Header.js"
+import { Header } from "../../common/components/Header"
 import { useAppDispatch } from "../../app/hooks"
 import { authThunks } from "./auth.slice"
 import { Controller, useForm } from "react-hook-form"
-import { SuperButton } from "../../common/components/SuperButton.js"
-import { PasswordInput } from "../../common/components/PasswordInput.js"
+import { SuperButton } from "../../common/components/SuperButton"
+import { PasswordInput } from "../../common/components/PasswordInput"
 
 export type FormData = {
   email: string
@@ -90,7 +90,7 @@ export const Login = () => {
             <Stack spacing={3} alignItems="center">
               <SuperButton
                 width={"347px"}
-                text={"Login"}
+                text={"Sign in"}
                 borderRadius="30px"
                 type="submit"
               />

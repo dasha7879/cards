@@ -1,14 +1,12 @@
 import { Box, Grid, Paper, Stack, Typography, Checkbox } from "@mui/material"
-import { EmailInput } from "../../common/components/EmailInput.tsx"
-import { Header } from "../../common/components/Header.js"
+import { Header } from "../../common/components/Header"
+import { PasswordInput } from "../../common/components/PasswordInput"
+import { SuperButton } from "../../common/components/SuperButton"
 import { useAppDispatch } from "../../app/hooks"
-import { authThunks } from "./auth.slice"
-import { Controller, useForm } from "react-hook-form"
-import { SuperButton } from "../../common/components/SuperButton.js"
-import { PasswordInput } from "../../common/components/PasswordInput.js"
+import { useForm } from "react-hook-form"
 
- type FormNewPasswordData = {
-  password: string 
+type FormNewPasswordData = {
+  password: string
 }
 
 export const NewPasword = () => {
@@ -44,8 +42,8 @@ export const NewPasword = () => {
     },
   })
 
-  const onSubmit = (data:FormNewPasswordData) => {
-  NewPaswordHandler()
+  const onSubmit = (data: FormNewPasswordData) => {
+    NewPaswordHandler()
     console.log(data)
   }
 
@@ -55,17 +53,27 @@ export const NewPasword = () => {
       <Grid container>
         <Paper elevation={10} style={paperStyle}>
           <Typography variant="h1" textAlign={"center"}>
-          Create new password
+            Create new password
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} width={400}>
-            <PasswordInput name="newPassword" register={register} text={"Password"} />
+              <PasswordInput
+                name="newPassword"
+                register={register}
+                text={"Password"}
+              />
             </Stack>
             <Typography
               variant="h6"
-              style={{ textAlign: "left", padding: "25px 0px 65px 0", opacity: 0.5}}
+              style={{
+                textAlign: "left",
+                padding: "25px 0px 65px 0",
+                opacity: 0.5,
+              }}
             >
-Create new password and we will send you further instructions to email            </Typography>
+              Create new password and we will send you further instructions to
+              email{" "}
+            </Typography>
             <Stack spacing={3} alignItems="center">
               <SuperButton
                 width={"347px"}

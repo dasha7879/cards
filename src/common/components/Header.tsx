@@ -3,6 +3,7 @@ import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import { SuperButton } from "./SuperButton"
+//если человек авторизован , то показать ему хедер и его именем, если нет , то AppHeader
 
 export const Header = () => {
   return (

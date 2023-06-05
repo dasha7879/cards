@@ -1,18 +1,13 @@
-import {Grid, Paper, Stack, Typography } from "@mui/material"
-import { Header } from "../../../common/components/Header.js"
-import { useAppDispatch } from "../../../app/hooks.js"
-import { SuperButton } from "../../../common/components/SuperButton.js"
+import { Grid, Paper, Stack, Typography } from "@mui/material"
+import { Header } from "../../../common/components/Header"
+import { SuperButton } from "../../../common/components/SuperButton"
+import { useAppDispatch } from "../../../app/hooks"
 
-export type FormData = {
-  email: string
-  password: string
-  rememberMe: boolean
-}
 
 export const CheckEmail = () => {
   const dispatch = useAppDispatch()
-   
-const example = 'example@mail.com'
+
+  const example = "example@mail.com"
 
   const paperStyle = {
     padding: 33,
@@ -22,8 +17,8 @@ const example = 'example@mail.com'
     margin: "20px auto",
   }
 
-  const backToLogin = ()=>{
-    console.log('backToLogin'); 
+  const backToLogin = () => {
+    console.log("backToLogin")
   }
 
   return (
