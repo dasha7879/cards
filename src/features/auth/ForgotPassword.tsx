@@ -58,7 +58,7 @@ export const ForgotPassword = () => {
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} width={400}>
-              <EmailInput name="forgotEmail" register={register} />
+              <EmailInput name="forgotPasswordEmail" register={register} />
             </Stack>
             <Typography
               variant="h6"
