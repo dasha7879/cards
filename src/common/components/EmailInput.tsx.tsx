@@ -1,12 +1,11 @@
 import TextField from "@mui/material/TextField"
 import { UseFormRegister } from "react-hook-form"
-import { FormData } from "../../features/auth/Login"
 
 
 
 type EmailInputType = {
   name: "email"
-  register: UseFormRegister<FormData>
+  register: UseFormRegister<any>
 }
 
 export const EmailInput:React.FC<EmailInputType> = ({name,register}) => {

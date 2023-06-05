@@ -8,11 +8,11 @@ import {
 } from "@mui/material"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
 import { Header } from "../../common/components/Header.js"
-import { Password } from "../../common/components/PasswordInput.js"
 import { useAppDispatch } from "../../app/hooks"
 import { authThunks } from "./auth.slice"
 import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton.js"
+import { PasswordInput } from "../../common/components/PasswordInput.js"
 
 export type FormData = {
   email: string
@@ -70,7 +70,7 @@ export const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} width={400}>
               <EmailInput name="email" register={register} />
-              <Password name="password" register={register} />
+              <PasswordInput name="password" register={register} text={"Password"} />
             </Stack>
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
               <Controller

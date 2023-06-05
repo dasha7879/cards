@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom"
 import { path } from "./paths"
 import App from "../../app/App"
 import { Profile } from "../../features/auth/Profile"
-import { Registration } from "../../features/auth/registration/Registration"
 import { Cards } from "../../features/cards/components/Cards"
 import { Packs } from "../../features/packs/components/packs/Packs"
 import { Learn } from "../../features/learn/components/Learn"
@@ -10,6 +9,7 @@ import { CheckEmail } from "../../features/auth/CheckEmail"
 import { NewPasword } from "../../features/auth/NewPassword"
 import { ForgotPassword } from "../../features/auth/ForgotPassword"
 import { Login } from "../../features/auth/Login"
+import { Registration } from "../../features/auth/Registration"
 
 export const router = createBrowserRouter([
   {

@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "./hooks"
 import { appActions } from "./appSlice"
 import { Header } from "../common/components/Header"
 import { SuperButton } from "../common/components/SuperButton"
-import TestForm from "../features/auth/TestForm"
 
 function App() {
   const isLoading = useAppSelector((state) => state.app.isLoading)
@@ -24,7 +23,6 @@ function App() {
       <Header />
       {/* <SuperButton width={"200"} text={"hi"} onClick={onc} />
        */}
-       <TestForm/>
       {isLoading && <h1>Loader...</h1>}
       {/* <Counter /> */}
       {/* <Form/> */}

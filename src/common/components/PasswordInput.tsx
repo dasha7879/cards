@@ -8,10 +8,15 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 
 type PasswordInputType = {
-  name: "password"
-  register: UseFormRegister<FormData>
+  name: "password" | "confirmPassword"
+  register: UseFormRegister<any>
+  text: string
 }
-export const Password: React.FC<PasswordInputType> = ({ name, register }) => {
+export const PasswordInput: React.FC<PasswordInputType> = ({
+  name,
+  register,
+  text,
+}) => {
   const [visibilityEye, setVisibilityEye] = useState<boolean>(false)
   const setPasswordVisible = () => {
     setVisibilityEye(!visibilityEye)
@@ -23,7 +28,7 @@ export const Password: React.FC<PasswordInputType> = ({ name, register }) => {
         {...register(name)}
         // error={!!errors[name]}
         // helperText={`${errors[name] ? errors[name]?.message : ''}`}
-        label={"Password"}
+        label={text}
         type={`${visibilityEye ? "text" : "password"}`}
         variant="standard"
         sx={{ opacity: 0.6 }}
