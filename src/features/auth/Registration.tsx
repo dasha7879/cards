@@ -15,12 +15,9 @@ export type FormRegistrationData = {
 export const Registration = () => {
   const dispatch = useAppDispatch()
 
-  const registrationHandler = () => {
+  const registrationHandler = (formData:FormRegistrationData) => {
     dispatch(
-      authThunks.register({
-        email: "MikSma@gmail.com", //hardCode
-        password: "1qazxcvBG90"
-      }),
+      authThunks.register(formData),
     )
   }
 
@@ -48,7 +45,7 @@ export const Registration = () => {
   })
 
   const onSubmit = (data: FormRegistrationData) => {
-    registrationHandler()
+    registrationHandler(data)
     console.log(data)
   }
 
