@@ -1,7 +1,6 @@
 import IconButton from "@mui/material/IconButton"
 import { useState } from "react"
 import { UseFormRegister } from "react-hook-form"
-import { FormData } from "../../features/auth/Login"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import VisibilityOff from "@mui/icons-material/VisibilityOff"

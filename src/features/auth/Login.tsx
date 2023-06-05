@@ -56,6 +56,7 @@ export const Login = () => {
   })
 
   const onSubmit = (data: FormData) => {
+    loginHandler()
     console.log(data)
   }
 

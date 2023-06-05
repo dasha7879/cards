@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../app/hooks"
 import { useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton.js"
 import { PasswordInput } from "../../common/components/PasswordInput.js"
+import { authThunks } from "./auth.slice.js"
 
 export type FormRegistrationData = {
   email: string
@@ -14,6 +15,16 @@ export type FormRegistrationData = {
 export const Registration = () => {
   const dispatch = useAppDispatch()
 
+  const registrationHandler = () => {
+    dispatch(
+      authThunks.register({
+        email: "MikSma@gmail.com", //hardCode
+        password: "1qazxcvBG90"
+      }),
+    )
+  }
+
+  
   const paperStyle = {
     padding: 33,
     minHeight: "55vh",
@@ -37,6 +48,7 @@ export const Registration = () => {
   })
 
   const onSubmit = (data: FormRegistrationData) => {
+    registrationHandler()
     console.log(data)
   }
 

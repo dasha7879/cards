@@ -3,11 +3,10 @@ import { authApi, ArgLoginType, ArgType, ProfileType, RegisterResponseType } fro
 import { createAppAsyncThunk } from "../../common/utils/create-app-async-thunk"
 
 
-//доделала типизашку и заменила async await
+
 const register = createAppAsyncThunk<void, ArgType>("auth/register",async (arg: ArgType) => {
   const res = await authApi.register(arg)
   console.log(res.data)
-//   return res.data
 })
 
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>
