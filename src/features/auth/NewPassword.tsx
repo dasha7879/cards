@@ -8,7 +8,7 @@ import { SuperButton } from "../../common/components/SuperButton.js"
 import { PasswordInput } from "../../common/components/PasswordInput.js"
 
  type FormNewPasswordData = {
-  email: string 
+  password: string 
 }
 
 export const NewPasword = () => {
@@ -17,8 +17,8 @@ export const NewPasword = () => {
   const NewPaswordHandler = () => {
     // dispatch(
     //   authThunks.login({
-    //     email: "MikSma@gmail.com",
-    //     password: "1qazxcvBG90",
+    //     password: "MikSma@gmail.com",
+    //     email: "1qazxcvBG90",
     //     rememberMe: true,
     //   }),
     // )
@@ -40,7 +40,7 @@ export const NewPasword = () => {
     control,
   } = useForm<FormNewPasswordData>({
     defaultValues: {
-      email: "",
+      password: "",
     },
   })
 

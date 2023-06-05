@@ -7,7 +7,7 @@ import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton.js"
 import { PasswordInput } from "../../common/components/PasswordInput.js"
 
-export type FormData = {
+export type FormForgotData = {
   email: string
   password: string
   rememberMe: boolean
