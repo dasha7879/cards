@@ -3,14 +3,11 @@ import { EmailInput } from "../../common/components/EmailInput.tsx"
 import { Header } from "../../common/components/Header.js"
 import { useAppDispatch } from "../../app/hooks"
 import { authThunks } from "./auth.slice"
-import { Controller, useForm } from "react-hook-form"
+import {  useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton.js"
-import { PasswordInput } from "../../common/components/PasswordInput.js"
 
 export type FormForgotData = {
   email: string
-  password: string
-  rememberMe: boolean
 }
 
 export const ForgotPassword = () => {
@@ -40,15 +37,13 @@ export const ForgotPassword = () => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<FormData>({
+  } = useForm<FormForgotData>({
     defaultValues: {
       email: "",
-      password: "",
-      rememberMe: false,
     },
   })
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: FormForgotData) => {
     ForgotPasswordHandler()
     console.log(data)
   }
@@ -63,7 +58,7 @@ export const ForgotPassword = () => {
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} width={400}>
-              <EmailInput name="email" register={register} />
+              <EmailInput name="forgotEmail" register={register} />
             </Stack>
             <Typography
               variant="h6"
