@@ -88,7 +88,7 @@ export const Login = () => {
             </Typography>
             <Stack spacing={3} alignItems="center">
               <SuperButton
-                width={"327"}
+                width={"347px"}
                 text={"Login"}
                 borderRadius="30px"
                 type="submit"
