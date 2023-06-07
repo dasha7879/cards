@@ -1,11 +1,13 @@
 import { Box, Grid, Paper, Stack, Typography } from "@mui/material"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
-import { Header } from "../../common/components/Header.js"
+import { Header } from "../../common/components/Header"
 import { useAppDispatch } from "../../app/hooks"
 import { useForm } from "react-hook-form"
-import { SuperButton } from "../../common/components/SuperButton.js"
-import { PasswordInput } from "../../common/components/PasswordInput.js"
-import { authThunks } from "./auth.slice.js"
+import { SuperButton } from "../../common/components/SuperButton"
+import { PasswordInput } from "../../common/components/PasswordInput"
+import { authThunks } from "./auth.slice"
+import { useNavigate } from "react-router-dom"
+import { path } from "../../common/routes/paths"
 
 export type FormRegistrationData = {
   email: string
@@ -15,10 +17,16 @@ export type FormRegistrationData = {
 export const Registration = () => {
   const dispatch = useAppDispatch()
 
+
+  
+  const navigate = useNavigate()
+
   const registrationHandler = (formData:FormRegistrationData) => {
     dispatch(
-      authThunks.register(formData),
-    )
+      authThunks.register(formData)
+    ).then((res)=>{
+      navigate(path.LOGIN)
+    })
   }
 
   

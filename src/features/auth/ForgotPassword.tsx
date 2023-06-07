@@ -4,23 +4,38 @@ import { EmailInput } from "../../common/components/EmailInput.tsx"
 import { Header } from "../../common/components/Header.js"
 import { SuperButton } from "../../common/components/SuperButton"
 import { useAppDispatch } from "../../app/hooks"
+import { authThunks } from "./auth.slice.js"
+import { useNavigate } from "react-router-dom"
+import { path } from "../../common/routes/paths"
+
 
 
 export type FormForgotData = {
   email: string
 }
 
+
+
 export const ForgotPassword = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  
 
-  const ForgotPasswordHandler = () => {
-    // dispatch(
-    //   authThunks.login({
-    //     email: "MikSma@gmail.com",
-    //     password: "1qazxcvBG90",
-    //     rememberMe: true,
-    //   }),
-    // )
+  const ForgotPasswordHandler = (formData: FormForgotData) => {
+    
+    const payload = {
+      email: formData.email,
+      message: `<div style="background-color: lime; padding: 15px">
+      password recovery link: 
+      <a href='http://localhost:3000/#/set-new-password/$token$'>
+      link</a>
+      </div>`
+    }
+    dispatch(
+      authThunks.forgot(payload)
+    ).then((res)=>{
+      navigate(path.CHECK_EMAIL)
+    })
   }
 
   const paperStyle = {
@@ -44,8 +59,9 @@ export const ForgotPassword = () => {
   })
 
   const onSubmit = (data: FormForgotData) => {
-    ForgotPasswordHandler()
     console.log(data)
+    ForgotPasswordHandler(data)
+    // console.log(data)
   }
 
   return (
@@ -58,7 +74,7 @@ export const ForgotPassword = () => {
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} width={400}>
-              <EmailInput name="forgotPasswordEmail" register={register} />
+              <EmailInput name="email" register={register} />
             </Stack>
             <Typography
               variant="h6"

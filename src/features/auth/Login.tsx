@@ -13,6 +13,7 @@ import { authThunks } from "./auth.slice"
 import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
 import { PasswordInput } from "../../common/components/PasswordInput"
+import { path } from "../../common/routes/paths.js"
 
 export type FormData = {
   email: string
@@ -85,7 +86,7 @@ export const Login = () => {
               variant="h6"
               style={{ textAlign: "right", padding: "25px 20px 77px 0" }}
             >
-              Forgot the password?
+              <a href={path.FORGOT_PASSWORD}>Forgot the password?</a> 
             </Typography>
             <Stack spacing={3} alignItems="center">
               <SuperButton
