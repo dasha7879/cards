@@ -28,11 +28,10 @@ export const Login = () => {
 
   const loginHandler = (data: FormData) => {
     dispatch(
-      authThunks.login(data)
-    ).then(res=>{
+      authThunks.login(data))
       navigate(path.PROFILE)
-    })
-  }
+      
+    }
 
   const paperStyle = {
     padding: 33,

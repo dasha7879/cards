@@ -24,9 +24,17 @@ const register = createAppAsyncThunk<any, ArgType>(
 
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>(
   "auth/login",
-  async (arg) => {
-    const res = await authApi.login(arg)
-    return { profile: res.data }
+  async (arg, ThunkAPI) => {
+    const {rejectWithValue} = ThunkAPI
+
+    try{
+      const res = await authApi.login(arg)
+      return { profile: res.data }
+    }catch(e:any){
+      alert(e.message)
+        return rejectWithValue(e)
+    }
+ 
   },
 )
 
