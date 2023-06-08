@@ -33,9 +33,7 @@ export const Profile = () => {
           <Typography variant="h1" textAlign={"center"}>
             img
           </Typography>
-          {/* <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}> */}
           <EditableProfileTitle/>
-          {/* </Box> */}
           <Stack spacing={2} alignItems="center" paddingTop={8}>
             <Typography
               variant="h6"

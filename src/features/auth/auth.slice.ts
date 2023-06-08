@@ -5,9 +5,10 @@ import {
   ArgLoginType,
   ArgType,
   ProfileType,
+  ResponseMeType,
   RegisterResponseType,
-  ForgotResponseType,
   ArgForgotType,
+  UpdateProfileType,
 } from "./auth.api"
 import { createAppAsyncThunk } from "../../common/utils/create-app-async-thunk"
 
@@ -17,7 +18,7 @@ const register = createAppAsyncThunk<any, ArgType>(
   "auth/register",
   async (arg: ArgType) => {
     const res = await authApi.register(arg)
-   return res.data
+    return res.data
   },
 )
 
@@ -29,7 +30,10 @@ const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>(
   },
 )
 
-const forgot = createAppAsyncThunk<{ path: PathDirectionType; emailMessage: string } & ForgotResponseType, ArgForgotType>("auth/forgot", async (arg) => {
+const forgot = createAppAsyncThunk<
+  { path: PathDirectionType; emailMessage: string } & ResponseMeType,
+  ArgForgotType
+>("auth/forgot", async (arg) => {
   const res = await authApi.forgot(arg)
   return {
     path: path.CHECK_EMAIL as PathDirectionType,
@@ -37,7 +41,22 @@ const forgot = createAppAsyncThunk<{ path: PathDirectionType; emailMessage: stri
     info: res.data.info,
   }
 })
+const logout = createAppAsyncThunk<ResponseMeType>("auth/logout", async () => {
+  const res = await authApi.logout()
+  return {
+    info: res.data.info,
+  }
+})
 
+const updateProfile = createAppAsyncThunk<
+  { profile: ProfileType },
+  UpdateProfileType
+>("auth/updateProfile", async (arg) => {
+  const res = await authApi.updateProfile(arg)
+  return {
+    profile: res.data.updatedUser,
+  }
+})
 const slice = createSlice({
   name: "auth",
   initialState: {
@@ -55,8 +74,14 @@ const slice = createSlice({
         state.path = action.payload.path
         state.emailMessage = action.payload.emailMessage
       })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.profile = null
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.profile = action.payload.profile
+      })
   },
 })
 
 export const authReducer = slice.reducer
-export const authThunks = { register, login, forgot }
+export const authThunks = { register, login, forgot, logout, updateProfile }

@@ -14,6 +14,7 @@ import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { path } from "../../common/routes/paths.js"
+import { Navigate, useNavigate } from "react-router-dom"
 
 export type FormData = {
   email: string
@@ -23,15 +24,14 @@ export type FormData = {
 
 export const Login = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const loginHandler = () => {
+  const loginHandler = (data: FormData) => {
     dispatch(
-      authThunks.login({
-        email: "MikSma@gmail.com",
-        password: "1qazxcvBG90",
-        rememberMe: true,
-      }),
-    )
+      authThunks.login(data)
+    ).then(res=>{
+      navigate(path.PROFILE)
+    })
   }
 
   const paperStyle = {
@@ -57,7 +57,7 @@ export const Login = () => {
   })
 
   const onSubmit = (data: FormData) => {
-    loginHandler()
+    loginHandler(data)
     console.log(data)
   }
 
