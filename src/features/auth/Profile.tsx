@@ -69,9 +69,6 @@ export const Profile = () => {
               />
             </Badge>
           </Box>
-          <Typography variant="h1" textAlign={"center"}>
-            img
-          </Typography>
           <EditableProfileTitle />
           <Stack spacing={2} alignItems="center" paddingTop={8}>
             <Typography

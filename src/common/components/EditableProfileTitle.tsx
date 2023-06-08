@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { authThunks } from "../../features/auth/auth.slice"
 import { Box, Stack } from "@mui/material"
+import { SuperButton } from "./SuperButton"
 
 export const EditableProfileTitle = () => {
   const dispatch = useAppDispatch()
@@ -49,17 +50,22 @@ export const EditableProfileTitle = () => {
           </IconButton>
         </Typography>
       ) : (
-        <Stack spacing={2} width={400}>
-          <TextField
-            id="standard-basic"
-            label="Nickname"
-            variant="standard"
-            sx={{ opacity: 0.6 }}
-            value={userName}
-            onChange={onChangeName}
-            onBlur={offChangeMode}
-          />
-        </Stack>
+        <Box display={"flex"}  justifyContent={"raw"}>
+          <Stack spacing={2} width={400}>
+            <TextField
+              id="standard-basic"
+              label="Nickname"
+              variant="standard"
+              sx={{ opacity: 0.6 }}
+              value={userName}
+              onChange={onChangeName}
+              onBlur={offChangeMode}
+            />
+          </Stack>
+          <SuperButton
+                text={"Save"}
+              />
+        </Box>
       )}
     </div>
   )
