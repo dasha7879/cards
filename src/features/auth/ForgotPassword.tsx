@@ -27,13 +27,13 @@ export const ForgotPassword = () => {
       email: formData.email,
       message: `<div style="background-color: lime; padding: 15px">
       password recovery link: 
-      <a href='http://localhost:3000/#/set-new-password/$token$'>
+      <a href='http://localhost:5173/#/set-new-password/$token$'>
       link</a>
       </div>`
     }
     dispatch(
       authThunks.forgot(payload)
-    ).then((res)=>{
+    ).unwrap().then(()=>{
       navigate(path.CHECK_EMAIL)
     })
   }

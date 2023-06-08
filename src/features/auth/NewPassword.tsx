@@ -4,6 +4,7 @@ import { PasswordInput } from "../../common/components/PasswordInput"
 import { SuperButton } from "../../common/components/SuperButton"
 import { useAppDispatch } from "../../app/hooks"
 import { useForm } from "react-hook-form"
+import { useParams } from "react-router-dom"
 
 type FormNewPasswordData = {
   password: string
@@ -11,6 +12,10 @@ type FormNewPasswordData = {
 
 export const NewPasword = () => {
   const dispatch = useAppDispatch()
+
+  const {token} = useParams()
+  console.log(token);
+  
 
   const NewPaswordHandler = (data:FormNewPasswordData) => {
     // dispatch(

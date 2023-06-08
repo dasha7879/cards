@@ -28,9 +28,8 @@ export const Login = () => {
 
   const loginHandler = (data: FormData) => {
     dispatch(
-      authThunks.login(data))
-      navigate(path.PROFILE)
-      
+      authThunks.login(data)).unwrap().then(()=> navigate(path.PROFILE))
+    
     }
 
   const paperStyle = {
