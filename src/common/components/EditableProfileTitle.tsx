@@ -5,24 +5,26 @@ import Typography from "@mui/material/Typography"
 import { ChangeEvent, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { authThunks } from "../../features/auth/auth.slice"
-
+import { Box, Stack } from "@mui/material"
 
 export const EditableProfileTitle = () => {
-  const dispatch = useAppDispatch();
-  const name = useAppSelector((state)=>state.auth.profile?.name);
+  const dispatch = useAppDispatch()
+  const name = useAppSelector((state) => state.auth.profile?.name)
 
   const [userName, setUserName] = useState("Darya")
-    const [editMode, setEditMode] = useState<boolean>(false)
+  const [editMode, setEditMode] = useState<boolean>(false)
 
   const onEditMode = () => {
     setEditMode(true)
   }
-  const onChangeName = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-   setUserName(e.currentTarget.value)
+  const onChangeName = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setUserName(e.currentTarget.value)
   }
 
-  const offChangeMode =()=>{
-    dispatch(authThunks.updateProfile({name: userName}))
+  const offChangeMode = () => {
+    dispatch(authThunks.updateProfile({ name: userName }))
     setEditMode(false)
   }
 
@@ -47,10 +49,18 @@ export const EditableProfileTitle = () => {
           </IconButton>
         </Typography>
       ) : (
-        <TextField value={userName} onChange={onChangeName} onBlur={offChangeMode}/>
+        <Stack spacing={2} width={400}>
+          <TextField
+            id="standard-basic"
+            label="Nickname"
+            variant="standard"
+            sx={{ opacity: 0.6 }}
+            value={userName}
+            onChange={onChangeName}
+            onBlur={offChangeMode}
+          />
+        </Stack>
       )}
     </div>
   )
 }
-
-
