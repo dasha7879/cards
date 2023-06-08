@@ -12,9 +12,9 @@ type FormNewPasswordData = {
 export const NewPasword = () => {
   const dispatch = useAppDispatch()
 
-  const NewPaswordHandler = () => {
+  const NewPaswordHandler = (data:FormNewPasswordData) => {
     // dispatch(
-    //   authThunks.login({
+    //   authThunks.set({
     //     password: "MikSma@gmail.com",
     //     email: "1qazxcvBG90",
     //     rememberMe: true,
@@ -43,7 +43,7 @@ export const NewPasword = () => {
   })
 
   const onSubmit = (data: FormNewPasswordData) => {
-    NewPaswordHandler()
+    NewPaswordHandler(data)
     console.log(data)
   }
 
