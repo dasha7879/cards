@@ -27,7 +27,7 @@ export const ForgotPassword = () => {
       email: formData.email,
       message: `<div style="background-color: lime; padding: 15px">
       password recovery link: 
-      <a href='http://localhost:5173/#/set-new-password/$token$'>
+      <a href='http://localhost:5173/#/auth/set-new-password/$token$'>
       link</a>
       </div>`
     }

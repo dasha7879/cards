@@ -16,17 +16,14 @@ export type FormRegistrationData = {
 }
 export const Registration = () => {
   const dispatch = useAppDispatch()
-
-
   
   const navigate = useNavigate()
 
   const registrationHandler = (formData:FormRegistrationData) => {
     dispatch(
-      authThunks.register(formData))
-    // ).then((res)=>{
-    //   navigate(path.LOGIN)
-    // })
+      authThunks.register(formData)).then((res)=>{
+      navigate(path.LOGIN)
+    })
   }
 
   

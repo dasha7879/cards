@@ -1,24 +1,23 @@
 import { Button } from "@mui/material"
-import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react"
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-type SuperButtonPropsType =  {
+import React  from "react"
+type SuperButtonPropsType = {
   width?: string
   borderRadius?: string
   color?: "primary" | "secondary"
   text: string
   startIcon?: any
-  type?:'submit'
+  type?: "submit"
   onClick?: () => void
 }
 
 export const SuperButton: React.FC<SuperButtonPropsType> = ({
   width,
   borderRadius,
-  color ,
+  color,
   text,
   startIcon,
   onClick,
-  type
+  type,
 }) => {
   const buttonStyle = {
     width: `${width}`,
@@ -35,9 +34,8 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
       color={color || "primary"}
       sx={buttonStyle}
       startIcon={startIcon}
-      type={type || 'button'}
+      type={type || "button"}
       onClick={onClickCallBack}
-    
     >
       {text}
     </Button>

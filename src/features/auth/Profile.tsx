@@ -8,17 +8,18 @@ import {
   Stack,
   Typography,
 } from "@mui/material"
-import { useAppDispatch } from "../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { Header } from "../../common/components/Header"
 import { SuperButton } from "../../common/components/SuperButton"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import { EditableProfileTitle } from "../../common/components/EditableProfileTitle"
 import LocalSeeOutlinedIcon from "@mui/icons-material/LocalSeeOutlined"
+import img from "../../common/assets/photo_2023-01-14_16-14-57.jpg"
+import { authThunks } from "./auth.slice"
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-
-  const example = "example@mail.com"
+  const email = useAppSelector((state) => state.auth.profile?.email)
 
   const paperStyle = {
     padding: 33,
@@ -29,7 +30,7 @@ export const Profile = () => {
   }
 
   const onClickProfile = () => {
-    console.log("backToLogin")
+    dispatch(authThunks.logout())
   }
 
   return (
@@ -64,7 +65,7 @@ export const Profile = () => {
             >
               <Avatar
                 alt="user avatar"
-                src="/common/assets/photo_2023-01-14_16-14-57.jpg"
+                src={img}
                 sx={{ width: "96px", height: "96px", mt: "30px" }}
               />
             </Badge>
@@ -79,7 +80,7 @@ export const Profile = () => {
                 opacity: 0.5,
               }}
             >
-              {`${example}`}
+              {email}
             </Typography>
             <SuperButton
               startIcon={<ArrowBackIcon />}

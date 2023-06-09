@@ -12,7 +12,7 @@ export const EditableProfileTitle = () => {
   const dispatch = useAppDispatch()
   const name = useAppSelector((state) => state.auth.profile?.name)
 
-  const [userName, setUserName] = useState("Darya")
+  const [userName, setUserName] = useState(name)
   const [editMode, setEditMode] = useState<boolean>(false)
 
   const onEditMode = () => {

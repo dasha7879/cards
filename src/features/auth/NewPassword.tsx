@@ -1,30 +1,35 @@
-import { Box, Grid, Paper, Stack, Typography, Checkbox } from "@mui/material"
+import { Grid, Paper, Stack, Typography } from "@mui/material"
 import { Header } from "../../common/components/Header"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { SuperButton } from "../../common/components/SuperButton"
 import { useAppDispatch } from "../../app/hooks"
 import { useForm } from "react-hook-form"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { authThunks } from "./auth.slice"
+import { path } from "../../common/routes/paths"
 
 type FormNewPasswordData = {
   password: string
+  resetPasswordToken: string
 }
 
 export const NewPasword = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const {token} = useParams()
-  console.log(token);
-  
+  const { token } = useParams()
+  const tokenForReset = token ? token : ""
+  console.log(token)
 
-  const NewPaswordHandler = (data:FormNewPasswordData) => {
-    // dispatch(
-    //   authThunks.set({
-    //     password: "MikSma@gmail.com",
-    //     email: "1qazxcvBG90",
-    //     rememberMe: true,
-    //   }),
-    // )
+  const NewPaswordHandler = (data: FormNewPasswordData) => {
+    dispatch(
+      authThunks.setNewPassword({
+        password: data.password,
+        resetPasswordToken: tokenForReset,
+      }),
+    )
+      .unwrap()
+      .then(() => navigate(path.LOGIN))
   }
 
   const paperStyle = {
@@ -49,7 +54,6 @@ export const NewPasword = () => {
 
   const onSubmit = (data: FormNewPasswordData) => {
     NewPaswordHandler(data)
-    console.log(data)
   }
 
   return (
@@ -63,7 +67,7 @@ export const NewPasword = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} width={400}>
               <PasswordInput
-                name="newPassword"
+                name="password"
                 register={register}
                 text={"Password"}
               />

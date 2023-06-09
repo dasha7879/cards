@@ -1,11 +1,4 @@
-import {
-  Box,
-  Grid,
-  Paper,
-  Stack,
-  Typography,
-  Checkbox,
-} from "@mui/material"
+import { Box, Grid, Paper, Stack, Typography, Checkbox } from "@mui/material"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
 import { Header } from "../../common/components/Header"
 import { useAppDispatch } from "../../app/hooks"
@@ -14,7 +7,7 @@ import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { path } from "../../common/routes/paths.js"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export type FormData = {
   email: string
@@ -27,10 +20,10 @@ export const Login = () => {
   const navigate = useNavigate()
 
   const loginHandler = (data: FormData) => {
-    dispatch(
-      authThunks.login(data)).unwrap().then(()=> navigate(path.PROFILE))
-    
-    }
+    dispatch(authThunks.login(data))
+      .unwrap()
+      .then(() => navigate(path.PROFILE))
+  }
 
   const paperStyle = {
     padding: 33,
@@ -70,7 +63,11 @@ export const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} width={400}>
               <EmailInput name="email" register={register} />
-              <PasswordInput name="password" register={register} text={"Password"} />
+              <PasswordInput
+                name="password"
+                register={register}
+                text={"Password"}
+              />
             </Stack>
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
               <Controller
@@ -84,7 +81,7 @@ export const Login = () => {
               variant="h6"
               style={{ textAlign: "right", padding: "25px 20px 77px 0" }}
             >
-              <a href={path.FORGOT_PASSWORD}>Forgot the password?</a> 
+              <a href={path.FORGOT_PASSWORD}>Forgot the password?</a>
             </Typography>
             <Stack spacing={3} alignItems="center">
               <SuperButton

@@ -6,10 +6,14 @@ export const authApi = {
     return instance.post<RegisterResponseType>("auth/register", arg)
   },
   login: (arg: ArgLoginType) => {
-    return instance.post<LoginResponseType>("auth/login", arg)
+    return axios.post<LoginResponseType>(
+      "https://neko-back.herokuapp.com/2.0/auth/login",
+      arg,
+      { withCredentials: true },
+    )
   },
   forgot: (arg: ArgForgotType) => {
-    return axios.post<ResponseMeType>(
+    return axios.post<CommonResponseType>(
       "https://neko-back.herokuapp.com/2.0/auth/forgot",
       arg,
       { withCredentials: true },
@@ -23,13 +27,14 @@ export const authApi = {
     return instance.put<UpdateProfileResponseType>("auth/me", arg)
   },
   logout: () => {
-    return instance.delete<ResponseMeType>("auth/me")
+    return instance.delete<CommonResponseType>("auth/me")
   },
-  //почему ругается типизация на arg?
-  SetNewPassword: (arg: any) => {
-    return axios.delete<ResponseMeType>(
-      "https://neko-back.herokuapp.com/2.0",
+
+  SetNewPassword: (arg: SetNewPassordType) => {
+    return axios.post<CommonResponseType>(
+      "https://neko-back.herokuapp.com/2.0/auth/set-new-password",
       arg,
+      { withCredentials: true },
     )
   },
   block: (arg: BlockType) => {
@@ -76,19 +81,10 @@ export type ArgSetNewPasswordType = {
 }
 
 // delete duplicate
-export type ResponseMeType = {
+export type CommonResponseType = {
   info: string
   error?: string
 }
-
-// export type DeleteMeResponseType = {
-//   info: string
-//   error: string
-// }
-// export type ForgotResponseType = {
-//   info: string
-//   error?: string
-// }
 
 export type LoginResponseType = {
   created: string
@@ -103,4 +99,9 @@ export type LoginResponseType = {
   verified: boolean
   __v: number
   _id: string
+}
+
+export type SetNewPassordType = {
+  password: string
+  resetPasswordToken: string
 }
