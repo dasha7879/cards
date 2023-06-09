@@ -7,7 +7,7 @@ import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { path } from "../../common/routes/paths.js"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export type FormData = {
   email: string
@@ -81,7 +81,7 @@ export const Login = () => {
               variant="h6"
               style={{ textAlign: "right", padding: "25px 20px 77px 0" }}
             >
-              <a href={path.FORGOT_PASSWORD}>Forgot the password?</a>
+              <Link to={path.FORGOT_PASSWORD}>Forgot the password?</Link>
             </Typography>
             <Stack spacing={3} alignItems="center">
               <SuperButton
@@ -92,7 +92,7 @@ export const Login = () => {
               />
               <Typography variant="h6">Don't have account?</Typography>
               <Typography variant="h6">
-                <a href="#">Sign Up</a>
+                <Link to = {path.REGISTRATION}>Sign Up</Link>
               </Typography>
             </Stack>
           </form>

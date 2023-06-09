@@ -61,7 +61,6 @@ export const ForgotPassword = () => {
   const onSubmit = (data: FormForgotData) => {
     console.log(data)
     ForgotPasswordHandler(data)
-    // console.log(data)
   }
 
   return (

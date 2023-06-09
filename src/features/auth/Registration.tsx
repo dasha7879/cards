@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { authThunks } from "./auth.slice"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { path } from "../../common/routes/paths"
 
 export type FormRegistrationData = {
@@ -90,7 +90,7 @@ export const Registration = () => {
                 Already have an Account?
               </Typography>
               <Typography variant="h6">
-                <a href="#">Sign In</a>
+              <Link to = {path.LOGIN}>Sign In</Link>
               </Typography>
             </Stack>
           </form>
