@@ -29,7 +29,7 @@ function App() {
       {isLoading && <LinearProgress />}
       <Header />
       <SearchInput/>
-      {/* <PacksTable/> */}
+      <PacksTable/>
     </div>
   )
 }
