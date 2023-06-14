@@ -2,11 +2,11 @@ import { Grid, Paper, Stack, Typography } from "@mui/material"
 import { Header } from "../../common/components/Header"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { SuperButton } from "../../common/components/SuperButton"
-import { useAppDispatch } from "../../app/hooks"
 import { useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
 import { authThunks } from "./auth.slice"
 import { path } from "../../common/routes/paths"
+import { useAppDispatch } from "../../common/hooks"
 
 type FormNewPasswordData = {
   password: string
@@ -19,7 +19,6 @@ export const NewPasword = () => {
 
   const { token } = useParams()
   const tokenForReset = token ? token : ""
-  console.log(token)
 
   const NewPaswordHandler = (data: FormNewPasswordData) => {
     dispatch(

@@ -3,10 +3,10 @@ import IconButton from "@mui/material/IconButton"
 import TextField from "@mui/material/TextField/TextField"
 import Typography from "@mui/material/Typography"
 import { ChangeEvent, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { authThunks } from "../../features/auth/auth.slice"
 import { Box, Stack } from "@mui/material"
 import { SuperButton } from "./SuperButton"
+import { useAppDispatch, useAppSelector } from "../hooks"
 
 export const EditableProfileTitle = () => {
   const dispatch = useAppDispatch()

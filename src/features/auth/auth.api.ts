@@ -5,13 +5,11 @@ export const authApi = {
   register: (arg: ArgType) => {
     return instance.post<RegisterResponseType>("auth/register", arg)
   },
+
   login: (arg: ArgLoginType) => {
-    return axios.post<LoginResponseType>(
-      "https://neko-back.herokuapp.com/2.0/auth/login",
-      arg,
-      { withCredentials: true },
-    )
+    return instance.post<LoginResponseType>("auth/login",arg)
   },
+  
   forgot: (arg: ArgForgotType) => {
     return axios.post<CommonResponseType>(
       "https://neko-back.herokuapp.com/2.0/auth/forgot",

@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
 import { Header } from "../../common/components/Header.js"
 import { SuperButton } from "../../common/components/SuperButton"
-import { useAppDispatch } from "../../app/hooks"
 import { authThunks } from "./auth.slice.js"
 import { useNavigate } from "react-router-dom"
 import { path } from "../../common/routes/paths"
+import { useAppDispatch } from "../../common/hooks/useAppDispatch.js"
 
 
 
@@ -59,7 +59,6 @@ export const ForgotPassword = () => {
   })
 
   const onSubmit = (data: FormForgotData) => {
-    console.log(data)
     ForgotPasswordHandler(data)
   }
 

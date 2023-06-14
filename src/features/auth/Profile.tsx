@@ -8,7 +8,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material"
-import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { Header } from "../../common/components/Header"
 import { SuperButton } from "../../common/components/SuperButton"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
@@ -16,6 +15,7 @@ import { EditableProfileTitle } from "../../common/components/EditableProfileTit
 import LocalSeeOutlinedIcon from "@mui/icons-material/LocalSeeOutlined"
 import img from "../../common/assets/photo_2023-01-14_16-14-57.jpg"
 import { authThunks } from "./auth.slice"
+import { useAppDispatch, useAppSelector } from "../../common/hooks"
 
 export const Profile = () => {
   const dispatch = useAppDispatch()

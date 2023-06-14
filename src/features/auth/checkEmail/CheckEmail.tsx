@@ -1,7 +1,7 @@
 import { Grid, Paper, Stack, Typography } from "@mui/material"
 import { Header } from "../../../common/components/Header"
 import { SuperButton } from "../../../common/components/SuperButton"
-import { useAppDispatch } from "../../../app/hooks"
+import { useAppDispatch } from "../../../common/hooks"
 
 
 export const CheckEmail = () => {
@@ -18,7 +18,7 @@ export const CheckEmail = () => {
   }
 
   const backToLogin = () => {
-    console.log("backToLogin")
+    // console.log("backToLogin")
   }
 
   return (

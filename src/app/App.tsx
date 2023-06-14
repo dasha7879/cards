@@ -1,9 +1,13 @@
 import { useEffect } from "react"
 import "./App.css"
-import { useAppDispatch, useAppSelector } from "./hooks"
 import { appActions } from "./appSlice"
 import { Header } from "../common/components/Header"
 import { authThunks } from "../features/auth/auth.slice"
+import LinearProgress from "@mui/material/LinearProgress"
+import { useAppDispatch, useAppSelector } from "../common/hooks"
+import { PackNavigator } from "../common/components/PackNavigator"
+import { SearchInput } from "../common/components/SearchInput"
+import { PacksTable } from "../common/components/PacksTable"
 
 function App() {
   debugger
@@ -13,17 +17,19 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(authThunks.me())
+    dispatch(authThunks.me()) 
     setTimeout(() => {
       dispatch(appActions.setIsLoading({ isLoading: false }))
     }, 3000)
   }, [])
 
-  const onc = () => console.log("onc")
+
   return (
     <div>
+      {isLoading && <LinearProgress />}
       <Header />
-      {isLoading && <h1>Loader...</h1>}
+      <SearchInput/>
+      {/* <PacksTable/> */}
     </div>
   )
 }

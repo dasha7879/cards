@@ -1,13 +1,14 @@
 import { Box, Grid, Paper, Stack, Typography, Checkbox } from "@mui/material"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
 import { Header } from "../../common/components/Header"
-import { useAppDispatch } from "../../app/hooks"
 import { authThunks } from "./auth.slice"
 import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { path } from "../../common/routes/paths.js"
 import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { useAppDispatch } from "../../common/hooks/useAppDispatch"
 
 export type FormData = {
   email: string
@@ -22,8 +23,11 @@ export const Login = () => {
   const loginHandler = (data: FormData) => {
     dispatch(authThunks.login(data))
       .unwrap()
-      .then(() => navigate(path.PROFILE))
-  }
+      .then(() => {
+        toast.success("Вы успешно залогинились")
+        navigate(path.PROFILE)
+      })
+  } 
 
   const paperStyle = {
     padding: 33,
@@ -49,7 +53,6 @@ export const Login = () => {
 
   const onSubmit = (data: FormData) => {
     loginHandler(data)
-    console.log(data)
   }
 
   return (
@@ -92,7 +95,7 @@ export const Login = () => {
               />
               <Typography variant="h6">Don't have account?</Typography>
               <Typography variant="h6">
-                <Link to = {path.REGISTRATION}>Sign Up</Link>
+                <Link to={path.REGISTRATION}>Sign Up</Link>
               </Typography>
             </Stack>
           </form>

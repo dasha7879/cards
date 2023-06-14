@@ -1,13 +1,14 @@
 import { Box, Grid, Paper, Stack, Typography } from "@mui/material"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
 import { Header } from "../../common/components/Header"
-import { useAppDispatch } from "../../app/hooks"
 import { useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { authThunks } from "./auth.slice"
 import { Link, useNavigate } from "react-router-dom"
 import { path } from "../../common/routes/paths"
+import { useAppDispatch } from "../../common/hooks"
+
 
 export type FormRegistrationData = {
   email: string
@@ -21,7 +22,7 @@ export const Registration = () => {
 
   const registrationHandler = (formData:FormRegistrationData) => {
     dispatch(
-      authThunks.register(formData)).then((res)=>{
+      authThunks.register(formData)).unwrap().then((res)=>{
       navigate(path.LOGIN)
     })
   }
@@ -51,7 +52,6 @@ export const Registration = () => {
 
   const onSubmit = (data: FormRegistrationData) => {
     registrationHandler(data)
-    console.log(data)
   }
 
   return (
