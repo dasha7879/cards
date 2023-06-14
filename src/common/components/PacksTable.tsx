@@ -8,7 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useState } from 'react';
-import { styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
+import { CardsPagination } from './CardsPagination';
 
 interface Column {
   id: 'name' | 'cards' | 'updated' | 'created'| 'actions';
@@ -20,8 +21,9 @@ interface Column {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      backgroundColor: theme.palette.secondary.dark,
+      color: theme.palette.common.black,
+      fontWeight:700
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
@@ -58,8 +60,11 @@ const rows = [
   createData('Pack Name',4,'18.03.2021', 'Ivan Ivanov', 'img'),
   createData('Pack Name',37,'18.03.2021', 'Ivan Ivanov', 'img'),
   createData('Pack Name',18,'18.03.2021', 'Ivan Ivanov', 'img'),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img')
-  
+  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img'),
+  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img'),
+  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img'),
+  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img'),
+//7  
 ];
 
 
@@ -81,7 +86,8 @@ export const PacksTable: React.FC<PacksTablePropsType>=({})=>{
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <>
+    <Paper sx={{ width: '100%', overflow: 'hidden', margin:'0 auto'}}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead sx={{bgcolor: 'red'}}>
@@ -119,15 +125,8 @@ export const PacksTable: React.FC<PacksTablePropsType>=({})=>{
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
+    <CardsPagination count={10}/>
+    </>
   );
 }

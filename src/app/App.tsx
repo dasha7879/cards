@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../common/hooks"
 import { PackNavigator } from "../common/components/PackNavigator"
 import { SearchInput } from "../common/components/SearchInput"
 import { PacksTable } from "../common/components/PacksTable"
+import { Packs } from "../features/packs/components/packs/Packs"
 
 function App() {
   debugger
@@ -28,8 +29,9 @@ function App() {
     <div>
       {isLoading && <LinearProgress />}
       <Header />
-      <SearchInput/>
-      <PacksTable/>
+      {/* <Packs/> */}
+      <SearchInput fullWidth/>
+      {/* <PacksTable/> */}
     </div>
   )
 }

@@ -8,7 +8,7 @@ type PackNavigatorType = {
 }
 export const PackNavigator:React.FC<PackNavigatorType> =({title,buttonText})=>{
     return (
-        <Box display="flex" flexDirection={"row"} justifyContent={"space-between"}>
+        <Box display="flex" flexDirection={"row"} justifyContent={"space-between"} width={'100%'} margin={'0 auto'} paddingTop={"44px"}>
             <Typography sx={{fontSize: "22px", fontWeight: "600"}}>{title}</Typography>
             <SuperButton text={buttonText} borderRadius="30px" width="175"/>
         </Box>
