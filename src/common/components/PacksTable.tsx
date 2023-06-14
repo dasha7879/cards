@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { useState } from 'react';
 import { Box, styled } from '@mui/material';
 import { CardsPagination } from './CardsPagination';
+import { ActionButtons } from './ActionButtons';
 
 interface Column {
   id: 'name' | 'cards' | 'updated' | 'created'| 'actions';
@@ -43,7 +44,7 @@ interface Data {
   cards: number;
   updated: string;
   created: string;
-  actions: string;
+  actions: any;
 }
 
 function createData(
@@ -51,19 +52,19 @@ function createData(
     cards: number,
     updated: string,
     created: string,
-    actions: string
+    actions: any
 ): Data {
   return { name,cards,updated,created,actions};
 }
 
 const rows = [
-  createData('Pack Name',4,'18.03.2021', 'Ivan Ivanov', 'img'),
-  createData('Pack Name',37,'18.03.2021', 'Ivan Ivanov', 'img'),
-  createData('Pack Name',18,'18.03.2021', 'Ivan Ivanov', 'img'),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img'),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img'),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img'),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', 'img'),
+  createData('Pack Name',4,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
+  createData('Pack Name',37,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
+  createData('Pack Name',18,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
+  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
+  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
+  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
+  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
 //7  
 ];
 
