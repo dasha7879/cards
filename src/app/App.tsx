@@ -9,9 +9,9 @@ import { PackNavigator } from "../common/components/PackNavigator"
 import { SearchInput } from "../common/components/SearchInput"
 import { PacksTable } from "../common/components/PacksTable"
 import { Packs } from "../features/packs/components/packs/Packs"
+import { EmptyPacksPage } from "../features/packs/components/packs/EmptyPacksPage"
 
 function App() {
-  debugger
 
   const isLoading = useAppSelector((state) => state.app.isLoading)
 
@@ -30,7 +30,8 @@ function App() {
       {isLoading && <LinearProgress />}
       <Header />
       {/* <Packs/> */}
-      <SearchInput fullWidth/>
+      {/* <SearchInput fullWidth/> */}
+     < EmptyPacksPage/>
       {/* <PacksTable/> */}
     </div>
   )

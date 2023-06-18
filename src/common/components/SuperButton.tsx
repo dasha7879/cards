@@ -2,7 +2,7 @@ import { Button } from "@mui/material"
 import React  from "react"
 type SuperButtonPropsType = {
   width?: string
-  variant?:string
+  variant?: "contained" | "text"
   borderRadius?: string
   color?: "primary" | "secondary"
   text: string
@@ -32,7 +32,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
 
   return (
     <Button
-      variant={"contained" || variant }
+      variant={ variant || "contained" }
       color={color || "primary"}
       sx={buttonStyle}
       startIcon={startIcon}
