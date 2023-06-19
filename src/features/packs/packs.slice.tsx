@@ -1,17 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { ArgParamsType, GetPackResponseType, PacksAPI } from "./packs.api"
+import {  ArgGetPacksParamsType, GetPackResponseType, PacksAPI } from "./packs.api"
 import { thunkTryCatch } from './../../common/utils/thunkTryCatch';
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk";
 
 const getPacks = createAppAsyncThunk<
-  { pack: GetPackResponseType }, ArgParamsType
+  { pack: GetPackResponseType }, ArgGetPacksParamsType 
 >("pack/getPacks", async (data, ThunkAPI) => {
   return thunkTryCatch(ThunkAPI, async () => {
     const res = await PacksAPI.getPacks(data)
     return { pack: res.data }
   })
 })
-
 
 
 const slice = createSlice({
@@ -26,7 +25,7 @@ const slice = createSlice({
       pageCount: "5",
       user_id: "",
       sortPacks: "0updated"
-    } as ArgParamsType,
+    } as  ArgGetPacksParamsType,
   },
   reducers: {},
   extraReducers: (builder) => {

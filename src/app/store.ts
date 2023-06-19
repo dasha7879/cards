@@ -9,7 +9,7 @@ export const store = configureStore({
     counter: counterReducer,
     app: appReducer,
     auth: authReducer,
-    pack: packReducer
+    packs: packReducer
   },
 })
 

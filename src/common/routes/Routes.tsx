@@ -52,7 +52,6 @@ export const router = createHashRouter([
         path: path.CARDS,
         element: <Cards />,
       },
-    ]
+    ],
   },
-  
 ])

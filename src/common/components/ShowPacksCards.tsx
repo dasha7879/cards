@@ -5,9 +5,7 @@ import Typography from "@mui/material/Typography"
 import { packThunk } from "../../features/packs/packs.slice"
 import { useAppDispatch } from "../hooks/useAppDispatch"
 import { useAppSelector } from "../hooks/useAppSelector"
-import { useSearchParams } from "react-router-dom"
-import { useEffect } from "react"
-import { ProfileType } from "../../features/auth/auth.api"
+
 
 type ShowPacksCardsPropsType = {
   // disabled?: boolean
