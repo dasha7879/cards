@@ -2,14 +2,46 @@ import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import ButtonGroup from "@mui/material/ButtonGroup"
 import Typography from "@mui/material/Typography"
+import { packThunk } from "../../features/packs/packs.slice"
+import { useAppDispatch } from "../hooks/useAppDispatch"
+import { useAppSelector } from "../hooks/useAppSelector"
+import { useSearchParams } from "react-router-dom"
+import { useEffect } from "react"
+import { ProfileType } from "../../features/auth/auth.api"
 
 type ShowPacksCardsPropsType = {
-  disabled?: boolean
-  onClick: () => void
-  onMy: boolean
-  setOnMy: (value: boolean) => void
+  // disabled?: boolean
+  // onClick: () => void
+  // onMy: boolean
+  // setOnMy: (value: boolean) => void
 }
-export const ShowPacksCards:React.FC<ShowPacksCardsPropsType> = ({disabled,onClick,onMy,setOnMy}) => {
+// disabled,onMy,setOnMy
+
+export const ShowPacksCards:React.FC<ShowPacksCardsPropsType> = ({}) => {
+  
+
+    const dispatch = useAppDispatch()
+    const userId =   useAppSelector((state)=>state.auth.profile?._id)
+    // console.log(userId);
+
+
+    
+    
+  
+    // const [searchParams, setSearchParams] = useSearchParams('user_id');
+
+    // const getQuery = searchParams.get('user_id')
+    // console.log(getQuery)
+  
+
+    const onClickHandler = () => { 
+        dispatch(packThunk.getPacks({user_id: userId}))
+    }
+    const onClickHandler1 = () => { 
+        dispatch(packThunk.getPacks({}))
+    }
+
+
   return (
     <Box
       sx={{
@@ -23,13 +55,15 @@ export const ShowPacksCards:React.FC<ShowPacksCardsPropsType> = ({disabled,onCli
         Show packs cards
       </Typography>
       <ButtonGroup variant="outlined">
-        <Button onClick={()=>alert("My")} >
+        <Button onClick={onClickHandler} >
           My
         </Button>
-        <Button onClick={()=>alert("All")}>
+        <Button onClick={onClickHandler1}>
           All
         </Button>
       </ButtonGroup>
     </Box>
   )
 }
+
+

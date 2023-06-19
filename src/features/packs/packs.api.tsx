@@ -1,7 +1,7 @@
 import { instance } from "../../common/api/commonApi"
 
 export const PacksAPI = {
-  getPacks: (params: ArgParamsType = {}) => {
+  getPacks: (params: ArgParamsType = {}, ) => {
     return instance.get<GetPackResponseType>("cards/pack", { params: params })
   },
 }
@@ -13,8 +13,6 @@ export type GetPackResponseType = {
   minCardsCount: number
   page: number
   pageCount: number
-  // token: string
-  // tokenDeathTime: number
 }
 
 export type ArgParamsType = {
@@ -24,9 +22,9 @@ export type ArgParamsType = {
   sortPacks?: "0updated" | "1updated"
   page?: string
   pageCount?: string
-  user_id?: string
-  block?: boolean
+  user_id?: string | undefined
 }
+
 export type PackType = {
   _id: string
   user_id: string

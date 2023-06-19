@@ -57,7 +57,7 @@ export const Login = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Grid container>
         <Paper elevation={10} style={paperStyle}>
           <Typography variant="h1" textAlign={"center"}>

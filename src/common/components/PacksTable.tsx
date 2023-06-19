@@ -5,20 +5,14 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { useState } from 'react';
-import { Box, styled } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { styled } from '@mui/material';
 import { CardsPagination } from './CardsPagination';
 import { ActionButtons } from './ActionButtons';
-
-interface Column {
-  id: 'name' | 'cards' | 'updated' | 'created'| 'actions';
-  label: string;
-  minWidth?: number;
-  align?: 'right';
-  format?: (value: number) => string;
-}
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { packSelector } from '../../features/packs/packsSelector';
+import { packThunk } from '../../features/packs/packs.slice';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,43 +24,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       fontSize: 14,
     },
   })); 
-  
-const columns: readonly Column[] = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'cards', label: 'Cards', minWidth: 100 },
-  { id: 'updated', label: 'Last Updated', minWidth: 100 },
-  { id: 'created', label: 'Created by', minWidth: 100 },
-  { id: 'actions', label: 'Actions', minWidth: 100 }
-];
-
-interface Data {
-  name: string;
-  cards: number;
-  updated: string;
-  created: string;
-  actions: any;
-}
-
-function createData(
-    name: string,
-    cards: number,
-    updated: string,
-    created: string,
-    actions: any
-): Data {
-  return { name,cards,updated,created,actions};
-}
-
-const rows = [
-  createData('Pack Name',4,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
-  createData('Pack Name',37,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
-  createData('Pack Name',18,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
-  createData('Pack Name',0,'18.03.2021', 'Ivan Ivanov', <ActionButtons/>),
-//7  
-];
 
 
 type PacksTablePropsType = {} 
@@ -74,17 +31,27 @@ type PacksTablePropsType = {}
 
 export const PacksTable: React.FC<PacksTablePropsType>=({})=>{
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const packs = useAppSelector(packSelector)
+  const dispatch = useAppDispatch()
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+  
+  useEffect(() => {
+    dispatch(packThunk.getPacks())
+  }, [])
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const columns = ['Name', 'Cards', 'Updated', 'Created','Actions']
+
+  // const handleChangePage = (event: unknown, newPage: number) => {
+  //   setPage(newPage);
+  // };
+
+  // const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
 
   return (
     <>
@@ -93,37 +60,31 @@ export const PacksTable: React.FC<PacksTablePropsType>=({})=>{
         <Table stickyHeader aria-label="sticky table">
           <TableHead sx={{bgcolor: 'red'}}>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column,index) => (
                 <StyledTableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  key={column[index]}
+
                 >
-                  {column.label}
+                  {column}
                 </StyledTableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              {packs.cardPacks?.map((pack) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.cards}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
+                  <TableRow hover role="checkbox" tabIndex={-1} key={pack._id}>
+                    <TableCell>{pack.name}</TableCell>
+                    <TableCell>{pack.cardsCount}</TableCell>
+                    <TableCell>{pack.updated}</TableCell>
+                    <TableCell>{pack.created}</TableCell>
+                    <TableCell>
+                      <ActionButtons />
+                    </TableCell>
                   </TableRow>
-                );
+                )
               })}
-          </TableBody>
+              </TableBody>
         </Table>
       </TableContainer>
     </Paper>

@@ -15,41 +15,44 @@ export const router = createHashRouter([
   {
     path: path.MAIN,
     element: <App />,
+    children: [
+      {
+        path: path.LOGIN,
+        element: <Login />,
+      },
+      {
+        path: path.CHECK_EMAIL,
+        element: <CheckEmail />,
+      },
+      {
+        path: path.FORGOT_PASSWORD,
+        element: <ForgotPassword />,
+      },
+      {
+        path: path.NEW_PASSWORD,
+        element: <NewPasword />,
+      },
+      {
+        path: path.PROFILE,
+        element: <Profile />,
+      },
+      {
+        path: path.REGISTRATION,
+        element: <Registration />,
+      },
+      {
+        path: path.LEARN,
+        element: <Learn />,
+      },
+      {
+        path: path.PACKS,
+        element: <Packs />,
+      },
+      {
+        path: path.CARDS,
+        element: <Cards />,
+      },
+    ]
   },
-  {
-    path: path.LOGIN,
-    element: <Login />,
-  },
-  {
-    path: path.CHECK_EMAIL,
-    element: <CheckEmail />,
-  },
-  {
-    path: path.FORGOT_PASSWORD,
-    element: <ForgotPassword />,
-  },
-  {
-    path: path.NEW_PASSWORD,
-    element: <NewPasword />,
-  },
-  {
-    path: path.PROFILE,
-    element: <Profile />,
-  },
-  {
-    path: path.REGISTRATION,
-    element: <Registration />,
-  },
-  {
-    path: path.LEARN,
-    element: <Learn />,
-  },
-  {
-    path: path.PACKS,
-    element: <Packs />,
-  },
-  {
-    path: path.CARDS,
-    element: <Cards />,
-  },
+  
 ])

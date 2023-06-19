@@ -10,18 +10,17 @@ import { SearchInput } from "../common/components/SearchInput"
 import { PacksTable } from "../common/components/PacksTable"
 import { Packs } from "../features/packs/components/packs/Packs"
 import { EmptyPacksPage } from "../features/packs/components/packs/EmptyPacksPage"
+import { Outlet } from "react-router-dom"
 
 function App() {
-
+// debugger
   const isLoading = useAppSelector((state) => state.app.isLoading)
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    // debugger
     dispatch(authThunks.me()) 
-    setTimeout(() => {
-      dispatch(appActions.setIsLoading({ isLoading: false }))
-    }, 3000)
   }, [])
 
 
@@ -29,10 +28,7 @@ function App() {
     <div>
       {isLoading && <LinearProgress />}
       <Header />
-      {/* <Packs/> */}
-      {/* <SearchInput fullWidth/> */}
-     < EmptyPacksPage/>
-      {/* <PacksTable/> */}
+      <Outlet/>
     </div>
   )
 }

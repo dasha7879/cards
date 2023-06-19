@@ -4,12 +4,10 @@ import { thunkTryCatch } from './../../common/utils/thunkTryCatch';
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk";
 
 const getPacks = createAppAsyncThunk<
-  { pack: GetPackResponseType }
+  { pack: GetPackResponseType }, ArgParamsType
 >("pack/getPacks", async (data, ThunkAPI) => {
   return thunkTryCatch(ThunkAPI, async () => {
-    const {getState} = ThunkAPI
-    const params = getState().pack.params
-    const res = await PacksAPI.getPacks(params)
+    const res = await PacksAPI.getPacks(data)
     return { pack: res.data }
   })
 })
@@ -39,4 +37,4 @@ const slice = createSlice({
 })
 
 export const packReducer = slice.reducer
-export const authThunk = { getPacks }
+export const packThunk = { getPacks }
