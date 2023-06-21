@@ -58,7 +58,6 @@ export const ForgotPassword = () => {
 
   return (
     <>
-      <Header />
       <Grid container>
         <Paper elevation={10} style={paperStyle}>
           <Typography variant="h1" textAlign={"center"}>

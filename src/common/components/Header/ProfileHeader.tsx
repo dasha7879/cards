@@ -6,6 +6,8 @@ import { Avatar, Container } from "@mui/material"
 import img from "../../../common/assets/photo_2023-01-14_16-14-57.jpg"
 
 export const ProfileHeader = () => {
+
+
   return (
     <AppBar position="static" color="secondary">
       <Container maxWidth="lg">
