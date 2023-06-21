@@ -4,10 +4,10 @@ import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import { Avatar, Container } from "@mui/material"
 import img from "../../../common/assets/photo_2023-01-14_16-14-57.jpg"
+import { Link } from "react-router-dom"
+import { path } from "../../routes/paths"
 
 export const ProfileHeader = () => {
-
-
   return (
     <AppBar position="static" color="secondary">
       <Container maxWidth="lg">
@@ -22,7 +22,7 @@ export const ProfileHeader = () => {
             flexDirection="row"
             alignItems={"center"}
           >
-            <div>Name</div>
+            <Link to={path.PROFILE}>Name</Link>
             <Avatar
               alt="user avatar"
               src={img}
