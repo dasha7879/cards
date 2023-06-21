@@ -1,41 +1,35 @@
 import { Box, Grid, Paper, Stack, Typography, Checkbox } from "@mui/material"
 import { useForm } from "react-hook-form"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
-import { Header } from "../../common/components/Header.js"
+import { Header } from "../../common/components/Header/Header.js"
 import { SuperButton } from "../../common/components/SuperButton"
 import { authThunks } from "./auth.slice.js"
 import { useNavigate } from "react-router-dom"
 import { path } from "../../common/routes/paths"
 import { useAppDispatch } from "../../common/hooks/useAppDispatch.js"
 
-
-
 export type FormForgotData = {
   email: string
 }
 
-
-
 export const ForgotPassword = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  
 
   const ForgotPasswordHandler = (formData: FormForgotData) => {
-    
     const payload = {
       email: formData.email,
       message: `<div style="background-color: lime; padding: 15px">
       password recovery link: 
       <a href='http://localhost:5173/#/auth/set-new-password/$token$'>
       link</a>
-      </div>`
+      </div>`,
     }
-    dispatch(
-      authThunks.forgot(payload)
-    ).unwrap().then(()=>{
-      navigate(path.CHECK_EMAIL)
-    })
+    dispatch(authThunks.forgot(payload))
+      .unwrap()
+      .then(() => {
+        navigate(path.CHECK_EMAIL)
+      })
   }
 
   const paperStyle = {
@@ -76,7 +70,11 @@ export const ForgotPassword = () => {
             </Stack>
             <Typography
               variant="h6"
-              style={{ textAlign: "left", padding: "25px 0px 65px 0", opacity: 0.5}}
+              style={{
+                textAlign: "left",
+                padding: "25px 0px 65px 0",
+                opacity: 0.5,
+              }}
             >
               Enter your email address and we will send you further instructions
             </Typography>
@@ -87,7 +85,12 @@ export const ForgotPassword = () => {
                 borderRadius="30px"
                 type="submit"
               />
-              <Typography variant="h6" style={{opacity: 0.5, fontWeight:600}}>Did you remember your password?</Typography>
+              <Typography
+                variant="h6"
+                style={{ opacity: 0.5, fontWeight: 600 }}
+              >
+                Did you remember your password?
+              </Typography>
               <Typography variant="h6">
                 <a href="#">Try logging in</a>
               </Typography>

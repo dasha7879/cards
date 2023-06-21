@@ -1,5 +1,5 @@
 import { Grid, Paper, Stack, Typography } from "@mui/material"
-import { Header } from "../../common/components/Header"
+import { Header } from "../../common/components/Header/Header"
 import { PasswordInput } from "../../common/components/PasswordInput"
 import { SuperButton } from "../../common/components/SuperButton"
 import { useForm } from "react-hook-form"
@@ -57,7 +57,6 @@ export const NewPasword = () => {
 
   return (
     <>
-      <Header />
       <Grid container>
         <Paper elevation={10} style={paperStyle}>
           <Typography variant="h1" textAlign={"center"}>

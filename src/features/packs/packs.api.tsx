@@ -4,14 +4,13 @@ export const PacksAPI = {
   getPacks: (params: ArgGetPacksParamsType = {}) => {
     return instance.get<GetPackResponseType>("cards/pack", { params: params })
   },
-  
-  // addNewCardPack: (newCardsPack:ArgNewCardsPackType) => {
-  //   return instance.post<AddNewPackResponseType>("cards/pack", {newCardsPack})
-  // },
 
-
+  addNewCardPack: (newCardsPack: ArgNewCardsPackType) => {
+    return instance.post<AddNewPackResponseType>("cards/pack", {
+      cardsPack: newCardsPack,
+    })
+  },
 }
-
 
 export type PackType = {
   _id: string
@@ -51,13 +50,13 @@ export type GetPackResponseType = {
 }
 
 export type ArgNewCardsPackType = {
-  name?: string 
-  deckCover?: string 
-  private?: boolean 
+  name?: string
+  deckCover?: string
+  private?: boolean
 }
 
 export type AddNewPackResponseType = {
-  newCardsPack: PackType[]
+  newCardsPack: PackType
   token: string
   tokenDeathTime: string
 }

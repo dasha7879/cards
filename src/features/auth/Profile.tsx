@@ -8,7 +8,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material"
-import { Header } from "../../common/components/Header"
 import { SuperButton } from "../../common/components/SuperButton"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import { EditableProfileTitle } from "../../common/components/EditableProfileTitle"
@@ -35,7 +34,6 @@ export const Profile = () => {
 
   return (
     <>
-      <Header />
       <Grid container>
         <Paper elevation={10} style={paperStyle}>
           <Typography variant="h1" textAlign={"center"}>

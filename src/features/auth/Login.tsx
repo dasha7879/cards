@@ -1,6 +1,6 @@
 import { Box, Grid, Paper, Stack, Typography, Checkbox } from "@mui/material"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
-import { Header } from "../../common/components/Header"
+import { Header } from "../../common/components/Header/Header.js"
 import { authThunks } from "./auth.slice"
 import { Controller, useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
@@ -27,7 +27,7 @@ export const Login = () => {
         toast.success("Вы успешно залогинились")
         navigate(path.PROFILE)
       })
-  } 
+  }
 
   const paperStyle = {
     padding: 33,
@@ -57,7 +57,6 @@ export const Login = () => {
 
   return (
     <>
-      {/* <Header /> */}
       <Grid container>
         <Paper elevation={10} style={paperStyle}>
           <Typography variant="h1" textAlign={"center"}>

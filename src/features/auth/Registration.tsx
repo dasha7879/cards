@@ -1,6 +1,6 @@
 import { Box, Grid, Paper, Stack, Typography } from "@mui/material"
 import { EmailInput } from "../../common/components/EmailInput.tsx"
-import { Header } from "../../common/components/Header"
+import { Header } from "../../common/components/Header/Header.js"
 import { useForm } from "react-hook-form"
 import { SuperButton } from "../../common/components/SuperButton"
 import { PasswordInput } from "../../common/components/PasswordInput"
@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { path } from "../../common/routes/paths"
 import { useAppDispatch } from "../../common/hooks"
 
-
 export type FormRegistrationData = {
   email: string
   password: string
@@ -17,17 +16,17 @@ export type FormRegistrationData = {
 }
 export const Registration = () => {
   const dispatch = useAppDispatch()
-  
+
   const navigate = useNavigate()
 
-  const registrationHandler = (formData:FormRegistrationData) => {
-    dispatch(
-      authThunks.register(formData)).unwrap().then((res)=>{
-      navigate(path.LOGIN)
-    })
+  const registrationHandler = (formData: FormRegistrationData) => {
+    dispatch(authThunks.register(formData))
+      .unwrap()
+      .then((res) => {
+        navigate(path.LOGIN)
+      })
   }
 
-  
   const paperStyle = {
     padding: 33,
     minHeight: "55vh",
@@ -56,7 +55,6 @@ export const Registration = () => {
 
   return (
     <>
-      <Header />
       <Grid container>
         <Paper elevation={10} style={paperStyle}>
           <Typography variant="h1" textAlign={"center"}>
@@ -90,7 +88,7 @@ export const Registration = () => {
                 Already have an Account?
               </Typography>
               <Typography variant="h6">
-              <Link to = {path.LOGIN}>Sign In</Link>
+                <Link to={path.LOGIN}>Sign In</Link>
               </Typography>
             </Stack>
           </form>
