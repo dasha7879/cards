@@ -29,25 +29,20 @@ type PacksTablePropsType = {}
 
 export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   const packs = useAppSelector(packSelector)
+
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(packThunk.getPacks({})).then((res) => console.log(res))
+    dispatch(packThunk.getPacks({}))
   }, [])
 
-  // const [page, setPage] = useState(0);
-  // const [rowsPerPage, setRowsPerPage] = useState(10);
+  // const onClickDelete = (id:'6497efab12a2311ea436854d') => {
+  //   dispatch(packThunk.deletePacks({id}))
+  //   // console.log()
+  //   dispatch(packThunk.getPacks({}))
+  // }
 
   const columns = ["Name", "Cards", "Updated", "Created", "Actions"]
-
-  // const handleChangePage = (event: unknown, newPage: number) => {
-  //   setPage(newPage);
-  // };
-
-  // const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setRowsPerPage(+event.target.value);
-  //   setPage(0);
-  // };
 
   return (
     <>
@@ -72,7 +67,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
                     <TableCell>{pack.updated}</TableCell>
                     <TableCell>{pack.created}</TableCell>
                     <TableCell>
-                      <ActionButtons />
+                      <ActionButtons  />
                     </TableCell>
                   </TableRow>
                 )

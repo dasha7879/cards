@@ -9,6 +9,7 @@ type SuperButtonPropsType = {
   startIcon?: any
   type?: "submit"
   onClick?: () => void
+  disabled?:boolean
 }
 
 export const SuperButton: React.FC<SuperButtonPropsType> = ({
@@ -20,6 +21,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
   startIcon,
   onClick,
   type,
+  disabled
 }) => {
   const buttonStyle = {
     width: `${width}`,
@@ -38,6 +40,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
       startIcon={startIcon}
       type={type || "button"}
       onClick={onClickCallBack}
+      disabled = {disabled}
     >
       {text}
     </Button>

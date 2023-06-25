@@ -1,6 +1,6 @@
 import { instance } from "../../common/api/commonApi"
 
-export const PacksAPI = {
+export const packsAPI = {
   getPacks: (params: ArgGetPacksParamsType = {}) => {
     return instance.get<GetPackResponseType>("cards/pack", { params: params })
   },
@@ -8,6 +8,11 @@ export const PacksAPI = {
   addNewCardPack: (newCardsPack: ArgNewCardsPackType) => {
     return instance.post<AddNewPackResponseType>("cards/pack", {
       cardsPack: newCardsPack,
+    })
+  },
+  deletePacks: (id:{id: string}) => {
+    return instance.delete<deletePackResponseType>("cards/pack", {
+      params: id
     })
   },
 }
@@ -60,3 +65,12 @@ export type AddNewPackResponseType = {
   token: string
   tokenDeathTime: string
 }
+export type deletePackResponseType = {
+  deleteCardsPack: PackType
+  token: string
+  tokenDeathTime: string
+}
+
+// export type ArgDeleteCardPackType = {
+//   id: string
+// }

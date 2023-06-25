@@ -20,10 +20,11 @@ const register = createAppAsyncThunk<any, ArgType>( // type
   async (arg: ArgType, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       const res = await authApi.register(arg)
-      // console.log("reg", res)
     })
   },
 )
+
+
 
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>(
   "auth/login",
