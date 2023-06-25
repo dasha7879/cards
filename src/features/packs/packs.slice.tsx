@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import {
+  ArgNewCardsPackType,
   GetPackResponseType,
   PackType,
   packsAPI,
@@ -18,6 +19,17 @@ const getPacks = createAppAsyncThunk<GetPackResponseType, paramsType>(
   },
 )
 
+const addPack = createAppAsyncThunk<PackType, ArgNewCardsPackType>(
+  "packs/addPack",
+  async (cardsPack, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      const res = await packsAPI.addPack(cardsPack)
+      console.log(res)
+      return res.data
+    })
+  },
+)
+
 const slice = createSlice({
   name: "packs",
   initialState: {
@@ -30,11 +42,15 @@ const slice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getPacks.fulfilled, (state, action) => {
-      state.cardPacks = action.payload.cardPacks
-    })
+    builder
+      .addCase(getPacks.fulfilled, (state, action) => {
+        state.cardPacks = action.payload.cardPacks
+      })
+      .addCase(addPack.fulfilled, (state, action) => {
+        state.cardPacks.unshift(action.payload)
+      })
   },
 })
 
 export const packsReducer = slice.reducer
-export const packsThunks = { getPacks }
+export const packsThunks = { getPacks, addPack }

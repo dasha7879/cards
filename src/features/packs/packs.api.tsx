@@ -1,14 +1,11 @@
 import { instance } from "../../common/api/commonApi"
 
-// export const packsAPI = {
-//   getPacks: (params: ArgGetPacksParamsType = {}) => {
-//     return instance.get<GetPackResponseType>("cards/pack", { params: params })
-//   }
-// }
-
 export const packsAPI = {
   getPacks: (params: paramsType) => {
     return instance.get<GetPackResponseType>("cards/pack", { params })
+  },
+  addPack: (cardsPack: ArgNewCardsPackType) => {
+    return instance.post<CommonResponseType>("cards/pack", { cardsPack })
   },
 }
 
@@ -21,7 +18,7 @@ export type paramsType = {
   pageCount?: string
   user_id?: string
   block?: boolean
-} //checked
+}
 
 export type PackType = {
   _id: string
@@ -41,16 +38,6 @@ export type PackType = {
   __v: number
 }
 
-export type ArgGetPacksParamsType = {
-  packName?: string
-  min?: string
-  max?: string
-  sortPacks?: "0updated" | "1updated"
-  page?: string
-  pageCount?: string
-  user_id?: string | undefined
-}
-
 export type GetPackResponseType = {
   cardPacks: PackType[]
   cardPacksTotalCount: number
@@ -58,7 +45,7 @@ export type GetPackResponseType = {
   minCardsCount: number
   page: number
   pageCount: number
-} //checked
+}
 
 export type ArgNewCardsPackType = {
   name?: string
@@ -66,13 +53,8 @@ export type ArgNewCardsPackType = {
   private?: boolean
 }
 
-export type AddNewPackResponseType = {
-  newCardsPack: PackType
-  token: string
-  tokenDeathTime: string
-}
-export type deletePackResponseType = {
-  deleteCardsPack: PackType
+export type CommonResponseType = {
+  pack: PackType
   token: string
   tokenDeathTime: string
 }
