@@ -1,21 +1,27 @@
 import { instance } from "../../common/api/commonApi"
 
-export const packsAPI = {
-  getPacks: (params: ArgGetPacksParamsType = {}) => {
-    return instance.get<GetPackResponseType>("cards/pack", { params: params })
-  },
+// export const packsAPI = {
+//   getPacks: (params: ArgGetPacksParamsType = {}) => {
+//     return instance.get<GetPackResponseType>("cards/pack", { params: params })
+//   }
+// }
 
-  addNewCardPack: (newCardsPack: ArgNewCardsPackType) => {
-    return instance.post<AddNewPackResponseType>("cards/pack", {
-      cardsPack: newCardsPack,
-    })
-  },
-  deletePacks: (id:{id: string}) => {
-    return instance.delete<deletePackResponseType>("cards/pack", {
-      params: id
-    })
+export const packsAPI = {
+  getPacks: (params: paramsType) => {
+    return instance.get<GetPackResponseType>("cards/pack", { params })
   },
 }
+
+export type paramsType = {
+  packName?: ""
+  min?: string
+  max?: string
+  sortPacks?: string
+  page?: string
+  pageCount?: string
+  user_id?: string
+  block?: boolean
+} //checked
 
 export type PackType = {
   _id: string
@@ -52,7 +58,7 @@ export type GetPackResponseType = {
   minCardsCount: number
   page: number
   pageCount: number
-}
+} //checked
 
 export type ArgNewCardsPackType = {
   name?: string
@@ -70,7 +76,3 @@ export type deletePackResponseType = {
   token: string
   tokenDeathTime: string
 }
-
-// export type ArgDeleteCardPackType = {
-//   id: string
-// }

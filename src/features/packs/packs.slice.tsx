@@ -1,80 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit"
 import {
-  ArgGetPacksParamsType,
-  ArgNewCardsPackType,
   GetPackResponseType,
   PackType,
   packsAPI,
+  paramsType,
 } from "./packs.api"
-import { thunkTryCatch } from "./../../common/utils/thunkTryCatch"
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk"
+import { thunkTryCatch } from "../../common/utils/thunkTryCatch"
 
-const getPacks = createAppAsyncThunk<
-  GetPackResponseType,
-  ArgGetPacksParamsType
->("pack/getPacks", async (data, ThunkAPI) => {
-  return thunkTryCatch(ThunkAPI, async () => {
-    const res = await packsAPI.getPacks(data)
-    return res.data
-  })
-})
-
-const addNewCardPack = createAppAsyncThunk<PackType, ArgNewCardsPackType>(
-  "pack/addNewCardPack",
-  async (data, ThunkAPI) => {
-    return thunkTryCatch(ThunkAPI, async () => {
-      const res = await packsAPI.addNewCardPack(data)
-      return { newCardsPack: res.data }
+const getPacks = createAppAsyncThunk<GetPackResponseType, paramsType>(
+  "packs/getPacks",
+  async (params, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      const res = await packsAPI.getPacks(params)
+      return res.data
     })
   },
 )
 
-// const deletePacks = createAppAsyncThunk<PackType, {id: string}>(
-//   "pack/deletePacks",
-//   async (data, ThunkAPI) => {
-//     return thunkTryCatch(ThunkAPI, async () => {
-//       const res = await packsAPI.deletePacks(data)
-//       console.log(res)
-//       return { deleteCardsPack: res.data }
-//       // это и есть id
-//     })
-//   },
-// )
-
 const slice = createSlice({
-  name: "pack",
+  name: "packs",
   initialState: {
-    packs: {} as GetPackResponseType,
-    params: {
-      packName: "",
-      min: "0",
-      max: "100",
-      page: "1",
-      pageCount: "5",
-      user_id: "",
-      sortPacks: "0updated",
-    } as ArgGetPacksParamsType,
+    cardPacks: [] as PackType[],
+    cardPacksTotalCount: 14,
+    maxCardsCount: 4,
+    minCardsCount: 0,
+    page: 1,
+    pageCount: 4,
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(getPacks.fulfilled, (state, action) => {
-        state.packs = action.payload;
-      })
-      .addCase(addNewCardPack.fulfilled, (state, action) => {
-        state.packs.cardPacks.unshift(action.payload);
-      })
-      // .addCase(deletePacks.fulfilled, (state,action)=>{
-      //   const index = state.packs.cardPacks.findIndex((pack)=> pack._id === action.payload._id);
-      //   if (index !== -1) state.packs.cardPacks.splice(index, 1);
-      // })
-
-  //     .addCase(removePack.fulfilled, (state, action) => {
-  //       const index = state.cardPacks.findIndex((pack) => pack._id === action.payload.packId);
-  //       if (index !== -1) state.cardPacks.splice(index, 1);
-  //     });
+    builder.addCase(getPacks.fulfilled, (state, action) => {
+      state.cardPacks = action.payload.cardPacks
+    })
   },
 })
 
-export const packReducer = slice.reducer
-export const packThunk = { getPacks, addNewCardPack}
+export const packsReducer = slice.reducer
+export const packsThunks = { getPacks }

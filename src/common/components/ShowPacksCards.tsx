@@ -2,9 +2,9 @@ import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import ButtonGroup from "@mui/material/ButtonGroup"
 import Typography from "@mui/material/Typography"
-import { packThunk } from "../../features/packs/packs.slice"
 import { useAppDispatch } from "../hooks/useAppDispatch"
 import { useAppSelector } from "../hooks/useAppSelector"
+import { packsThunks } from "../../features/packs/packs.slice"
 
 
 type ShowPacksCardsPropsType = {
@@ -33,10 +33,10 @@ export const ShowPacksCards:React.FC<ShowPacksCardsPropsType> = ({}) => {
   
 
     const onClickHandler = () => { 
-        dispatch(packThunk.getPacks({user_id: userId}))
+        dispatch(packsThunks.getPacks({user_id: userId}))
     }
     const onClickHandler1 = () => { 
-        dispatch(packThunk.getPacks({}))
+        dispatch(packsThunks.getPacks({}))
     }
 
 

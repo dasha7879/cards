@@ -12,7 +12,7 @@ import { CardsPagination } from "./CardsPagination"
 import { ActionButtons } from "./ActionButtons"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { packSelector } from "../../features/packs/packsSelector"
-import { packThunk } from "../../features/packs/packs.slice"
+import { packsThunks } from "../../features/packs/packs.slice"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,7 +33,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(packThunk.getPacks({}))
+    dispatch(packsThunks.getPacks({}))
   }, [])
 
   // const onClickDelete = (id:'6497efab12a2311ea436854d') => {
