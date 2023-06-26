@@ -4,15 +4,14 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit"
 import DeleteIcon from "@mui/icons-material/Delete"
 
 export type ActionButtonsPropsType = {
-  onClickDelete?: () => void
+  onClickDelete: ()=> void
 }
 
 export const ActionButtons: React.FC<ActionButtonsPropsType> = ({
-  onClickDelete,
+  onClickDelete
 }) => {
-  const onClickHandler = () => {
-    onClickDelete?.() 
-  }
+
+
   return (
     <>
       <IconButton aria-label="learn">
@@ -21,7 +20,7 @@ export const ActionButtons: React.FC<ActionButtonsPropsType> = ({
       <IconButton aria-label="edit">
         <ModeEditIcon />
       </IconButton>
-      <IconButton aria-label="delete" onClick={onClickHandler}>
+      <IconButton aria-label="delete" onClick={onClickDelete}>
         <DeleteIcon />
       </IconButton>
     </>

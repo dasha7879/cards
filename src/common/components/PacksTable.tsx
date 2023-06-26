@@ -29,6 +29,7 @@ type PacksTablePropsType = {}
 
 export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   const packs = useAppSelector(packSelector)
+  const user = useAppSelector((state) => state.auth.profile)
 
   const dispatch = useAppDispatch()
 
@@ -36,11 +37,10 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
     dispatch(packsThunks.getPacks({}))
   }, [])
 
-  // const onClickDelete = (id:'6497efab12a2311ea436854d') => {
-  //   dispatch(packThunk.deletePacks({id}))
-  //   // console.log()
-  //   dispatch(packThunk.getPacks({}))
-  // }
+  const onClickDelete = (id: string) => {
+    dispatch(packsThunks.deletePack({ id })) //  как задиспатчить сюда id
+    dispatch(packsThunks.getPacks({ user_id: user?._id }))
+  }
 
   const columns = ["Name", "Cards", "Updated", "Created", "Actions"]
 
@@ -67,7 +67,9 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
                     <TableCell>{pack.updated}</TableCell>
                     <TableCell>{pack.created}</TableCell>
                     <TableCell>
-                      <ActionButtons  />
+                      <ActionButtons
+                        onClickDelete={() => onClickDelete(pack._id)}
+                      />
                     </TableCell>
                   </TableRow>
                 )

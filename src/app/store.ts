@@ -9,7 +9,7 @@ export const store = configureStore({
     counter: counterReducer,
     app: appReducer,
     auth: authReducer,
-    packs:  packsReducer,
+    packs: packsReducer,
   },
 })
 
@@ -21,5 +21,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >
-
-

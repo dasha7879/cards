@@ -3,6 +3,7 @@ import {
   ArgNewCardsPackType,
   GetPackResponseType,
   PackType,
+  idPackType,
   packsAPI,
   paramsType,
 } from "./packs.api"
@@ -25,7 +26,18 @@ const addPack = createAppAsyncThunk<PackType, ArgNewCardsPackType>(
     return thunkTryCatch(thunkAPI, async () => {
       const res = await packsAPI.addPack(cardsPack)
       console.log(res)
-      return res.data
+      return res.data.newCardsPack
+    })
+  },
+)
+
+const deletePack = createAppAsyncThunk<PackType, idPackType>(
+  "packs/deletePack",
+  async (params, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      const res = await packsAPI.deletePack(params)
+      console.log(res.data)
+      return res.data.deletedCardsPack
     })
   },
 )
@@ -49,8 +61,15 @@ const slice = createSlice({
       .addCase(addPack.fulfilled, (state, action) => {
         state.cardPacks.unshift(action.payload)
       })
+      .addCase(deletePack.fulfilled, (state, action) => {
+        // state.cardPacks = state.cardPacks.filter((pack)=> pack._id !== action.payload._id)
+        const index = state.cardPacks.findIndex(
+          (pack) => pack._id === action.payload._id,
+        )
+        state.cardPacks.splice(index, 1)
+      })
   },
 })
 
 export const packsReducer = slice.reducer
-export const packsThunks = { getPacks, addPack }
+export const packsThunks = { getPacks, addPack, deletePack }

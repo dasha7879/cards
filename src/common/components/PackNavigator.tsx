@@ -19,7 +19,6 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
   const onclickHandler = () => {
     // setDisabled(true)
     dispatch(packsThunks.addPack({ name: "NewFolder" }))
-    dispatch(packsThunks.getPacks({})).then(()=>setDisabled(false))
    console.log('add');
    
 
