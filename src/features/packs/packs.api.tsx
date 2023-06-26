@@ -10,6 +10,14 @@ export const packsAPI = {
   deletePack: (params: idPackType) => {
     return instance.delete<CommonResponseType>("cards/pack", { params })
   },
+  upDatePack: (cardsPack: updatePackType) => {
+    return instance.put<CommonResponseType>("cards/pack", { cardsPack })
+  },
+}
+
+export type updatePackType = {
+  _id: string
+  name?: string
 }
 
 export type idPackType = {
@@ -62,7 +70,7 @@ export type ArgNewCardsPackType = {
 
 export type CommonResponseType = {
   [x in "newCardsPack" | "deletedCardsPack" | "updatedCardsPack"]: PackType
-} & { 
+} & {
   token: string
   tokenDeathTime: string
 }

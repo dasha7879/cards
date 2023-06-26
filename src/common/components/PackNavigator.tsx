@@ -14,14 +14,10 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
   buttonText,
 }) => {
   const dispatch = useAppDispatch()
-  const [disabled,setDisabled] = useState<boolean>(false)
+  const [disabled, setDisabled] = useState<boolean>(false)
 
   const onclickHandler = () => {
-    // setDisabled(true)
     dispatch(packsThunks.addPack({ name: "NewFolder" }))
-   console.log('add');
-   
-
   }
 
   return (
@@ -41,7 +37,6 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
         text={buttonText}
         borderRadius="30px"
         width="175"
-        disabled= {disabled}
       />
     </Box>
   )
