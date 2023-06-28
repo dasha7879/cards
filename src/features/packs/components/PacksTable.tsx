@@ -6,13 +6,13 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { styled } from "@mui/material"
-import { CardsPagination } from "./CardsPagination"
-import { ActionButtons } from "./ActionButtons"
-import { useAppDispatch, useAppSelector } from "../hooks"
-import { packSelector } from "../../features/packs/packsSelector"
-import { packsThunks } from "../../features/packs/packs.slice"
+import { CardsPagination } from "../../../common/components/CardsPagination"
+import { ActionButtons } from "../../../common/components/ActionButtons"
+import { useAppDispatch, useAppSelector } from "../../../common/hooks"
+import { packsThunks } from "../packs.slice"
+import { packSelector } from "../packsSelector"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,19 +30,20 @@ type PacksTablePropsType = {}
 export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   const packs = useAppSelector(packSelector)
   const user = useAppSelector((state) => state.auth.profile)
-
+  // const isSearch = "l"
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(packsThunks.getPacks({}))
+    // dispatch(packsThunks.getPacks({packName:isSearch}))
   }, [])
 
   const onClickDelete = (id: string) => {
-    dispatch(packsThunks.deletePack({ id })) 
+    dispatch(packsThunks.deletePack({ id }))
     dispatch(packsThunks.getPacks({ user_id: user?._id }))
   }
   const onClickEdit = (_id: string, name: string) => {
-    dispatch(packsThunks.upDatePack({_id,name}))
+    dispatch(packsThunks.upDatePack({ _id, name }))
   }
 
   const columns = ["Name", "Cards", "Updated", "Created", "Actions"]
@@ -72,7 +73,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
                     <TableCell>
                       <ActionButtons
                         onClickDelete={() => onClickDelete(pack._id)}
-                        onClickEdit={() => onClickEdit(pack._id, 'newName')}
+                        onClickEdit={() => onClickEdit(pack._id, "newName")}
                       />
                     </TableCell>
                   </TableRow>

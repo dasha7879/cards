@@ -8,22 +8,22 @@ import {
   Stack,
   Typography,
 } from "@mui/material"
-import { SuperButton } from "../../common/components/SuperButton"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
-import { EditableProfileTitle } from "../../common/components/EditableProfileTitle"
 import LocalSeeOutlinedIcon from "@mui/icons-material/LocalSeeOutlined"
 import img from "../../common/assets/photo_2023-01-14_16-14-57.jpg"
-import { authThunks } from "./auth.slice"
-import { useAppDispatch, useAppSelector } from "../../common/hooks"
 import { useNavigate } from "react-router-dom"
-import { path } from "../../common/routes/paths"
+import { useAppDispatch, useAppSelector } from "../../../common/hooks"
+import { path } from "../../../common/routes/paths"
+import { authThunks } from "../auth.slice"
+import { SuperButton } from "../../../common/components/SuperButton"
+import { EditableProfileTitle } from "../../../common/components/EditableProfileTitle"
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const email = useAppSelector((state) => state.auth.profile?.email)
   const navigate = useNavigate()
 
-  const showPacks = ()=>{
+  const showPacks = () => {
     navigate(path.PACKS)
   }
   const paperStyle = {
@@ -40,15 +40,15 @@ export const Profile = () => {
 
   return (
     <>
-      <Grid container  >
+      <Grid container>
         <Paper elevation={10} style={paperStyle}>
-        <SuperButton
-              color="primary"
-              text={"Packs"}
-              onClick={showPacks}
-              variant="text"
-              startIcon={<ArrowBackIcon />}
-            />
+          <SuperButton
+            color="primary"
+            text={"Packs"}
+            onClick={showPacks}
+            variant="text"
+            startIcon={<ArrowBackIcon />}
+          />
           <Typography variant="h1" textAlign={"center"}>
             Personal Information
           </Typography>

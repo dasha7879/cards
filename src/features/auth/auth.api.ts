@@ -7,9 +7,9 @@ export const authApi = {
   },
 
   login: (arg: ArgLoginType) => {
-    return instance.post<LoginResponseType>("auth/login",arg)
+    return instance.post<LoginResponseType>("auth/login", arg)
   },
-  
+
   forgot: (arg: ArgForgotType) => {
     return axios.post<CommonResponseType>(
       "https://neko-back.herokuapp.com/2.0/auth/forgot",

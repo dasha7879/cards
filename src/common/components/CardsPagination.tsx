@@ -1,11 +1,9 @@
 import Container from "@mui/material/Container/Container"
 import FormControl from "@mui/material/FormControl/FormControl"
 import FormHelperText from "@mui/material/FormHelperText/FormHelperText"
-import InputLabel from "@mui/material/InputLabel/InputLabel"
 import MenuItem from "@mui/material/MenuItem/MenuItem"
 import Pagination from "@mui/material/Pagination"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
-import Typography from "@mui/material/Typography"
 import { useState } from "react"
 
 export type CardsPaginationPropsType = {

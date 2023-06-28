@@ -6,7 +6,6 @@ import { useAppDispatch } from "../hooks/useAppDispatch"
 import { useAppSelector } from "../hooks/useAppSelector"
 import { packsThunks } from "../../features/packs/packs.slice"
 
-
 type ShowPacksCardsPropsType = {
   // disabled?: boolean
   // onClick: () => void
@@ -15,30 +14,16 @@ type ShowPacksCardsPropsType = {
 }
 // disabled,onMy,setOnMy
 
-export const ShowPacksCards:React.FC<ShowPacksCardsPropsType> = ({}) => {
-  
+export const ShowPacksCards: React.FC<ShowPacksCardsPropsType> = ({}) => {
+  const dispatch = useAppDispatch()
+  const userId = useAppSelector((state) => state.auth.profile?._id)
 
-    const dispatch = useAppDispatch()
-    const userId =   useAppSelector((state)=>state.auth.profile?._id)
-    // console.log(userId);
-
-
-    
-    
-  
-    // const [searchParams, setSearchParams] = useSearchParams('user_id');
-
-    // const getQuery = searchParams.get('user_id')
-    // console.log(getQuery)
-  
-
-    const onClickHandler = () => { 
-        dispatch(packsThunks.getPacks({user_id: userId}))
-    }
-    const onClickHandler1 = () => { 
-        dispatch(packsThunks.getPacks({}))
-    }
-
+  const onClickHandler = () => {
+    dispatch(packsThunks.getPacks({ user_id: userId }))
+  }
+  const onClickHandlerAll = () => {
+    dispatch(packsThunks.getPacks({}))
+  }
 
   return (
     <Box
@@ -53,15 +38,9 @@ export const ShowPacksCards:React.FC<ShowPacksCardsPropsType> = ({}) => {
         Show packs cards
       </Typography>
       <ButtonGroup variant="outlined">
-        <Button onClick={onClickHandler} >
-          My
-        </Button>
-        <Button onClick={onClickHandler1}>
-          All
-        </Button>
+        <Button onClick={onClickHandler}>My</Button>
+        <Button onClick={onClickHandlerAll}>All</Button>
       </ButtonGroup>
     </Box>
   )
 }
-
-

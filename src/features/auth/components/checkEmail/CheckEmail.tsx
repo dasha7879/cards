@@ -1,12 +1,14 @@
 import { Grid, Paper, Stack, Typography } from "@mui/material"
-import { Header } from "../../../common/components/Header/Header"
-import { SuperButton } from "../../../common/components/SuperButton"
-import { useAppDispatch } from "../../../common/hooks"
+import { SuperButton } from "../../../../common/components/SuperButton"
+import { useAppDispatch } from "../../../../common/hooks"
+import { useNavigate } from "react-router-dom"
+import { path } from "../../../../common/routes/paths"
 
 export const CheckEmail = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const example = "example@mail.com"
+  const example = "example@mail.com" //delere hardCode
 
   const paperStyle = {
     padding: 33,
@@ -17,7 +19,7 @@ export const CheckEmail = () => {
   }
 
   const backToLogin = () => {
-    // console.log("backToLogin")
+    navigate(path.LOGIN)
   }
 
   return (

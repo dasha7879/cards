@@ -50,7 +50,7 @@ export const EditableProfileTitle = () => {
           </IconButton>
         </Typography>
       ) : (
-        <Box display={"flex"}  justifyContent={"raw"}>
+        <Box display={"flex"} justifyContent={"raw"}>
           <Stack spacing={2} width={400}>
             <TextField
               id="standard-basic"
@@ -62,9 +62,7 @@ export const EditableProfileTitle = () => {
               onBlur={offChangeMode}
             />
           </Stack>
-          <SuperButton
-                text={"Save"}
-              />
+          <SuperButton text={"Save"} />
         </Box>
       )}
     </div>
