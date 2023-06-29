@@ -10,7 +10,6 @@ import {
 } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import LocalSeeOutlinedIcon from "@mui/icons-material/LocalSeeOutlined"
-import img from "../../common/assets/photo_2023-01-14_16-14-57.jpg"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../common/hooks"
 import { path } from "../../../common/routes/paths"
@@ -76,7 +75,7 @@ export const Profile = () => {
             >
               <Avatar
                 alt="user avatar"
-                src={img}
+                // src={img}
                 sx={{ width: "96px", height: "96px", mt: "30px" }}
               />
             </Badge>
