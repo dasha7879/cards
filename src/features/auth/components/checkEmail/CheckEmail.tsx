@@ -1,7 +1,6 @@
 import { Grid, Paper, Stack, Typography } from "@mui/material"
-import { Header } from "../../../common/components/Header/Header"
-import { SuperButton } from "../../../common/components/SuperButton"
-import { useAppDispatch } from "../../../common/hooks"
+import { SuperButton } from "../../../../common/components/SuperButton"
+import { useAppDispatch } from "../../../../common/hooks"
 
 export const CheckEmail = () => {
   const dispatch = useAppDispatch()

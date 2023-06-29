@@ -1,12 +1,11 @@
 import { Grid, Paper, Stack, Typography } from "@mui/material"
-import { Header } from "../../common/components/Header/Header"
-import { PasswordInput } from "../../common/components/PasswordInput"
-import { SuperButton } from "../../common/components/SuperButton"
+import { PasswordInput } from "../../../common/components/PasswordInput"
+import { SuperButton } from "../../../common/components/SuperButton"
 import { useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
-import { authThunks } from "./auth.slice"
-import { path } from "../../common/routes/paths"
-import { useAppDispatch } from "../../common/hooks"
+import { authThunks } from "../auth.slice"
+import { path } from "../../../common/routes/paths"
+import { useAppDispatch } from "../../../common/hooks"
 
 type FormNewPasswordData = {
   password: string

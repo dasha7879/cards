@@ -1,14 +1,13 @@
 import { Box, Grid, Paper, Stack, Typography, Checkbox } from "@mui/material"
-import { EmailInput } from "../../common/components/EmailInput.tsx"
-import { Header } from "../../common/components/Header/Header.js"
-import { authThunks } from "./auth.slice"
+import { EmailInput } from "../../../common/components/EmailInput.tsx.js"
+import { authThunks } from "../auth.slice.js"
 import { Controller, useForm } from "react-hook-form"
-import { SuperButton } from "../../common/components/SuperButton"
-import { PasswordInput } from "../../common/components/PasswordInput"
-import { path } from "../../common/routes/paths.js"
+import { SuperButton } from "../../../common/components/SuperButton.js"
+import { PasswordInput } from "../../../common/components/PasswordInput.js"
+import { path } from "../../../common/routes/paths.js"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { useAppDispatch } from "../../common/hooks/useAppDispatch"
+import { useAppDispatch } from "../../../common/hooks/useAppDispatch.js"
 
 export type FormData = {
   email: string
