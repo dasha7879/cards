@@ -3,9 +3,22 @@ import { NumberOfCards } from "../../../common/components/NumberOfCards"
 import { ShowPacksCards } from "../../../common/components/ShowPacksCards"
 import { SearchInput } from "../../../common/components/SearchInput"
 import Box from "@mui/material/Box"
+import { useAppDispatch, useAppSelector } from "../../../common/hooks"
+import { packsThunks } from "../packs.slice"
 
 
 export const PacksSettings = () => {
+  const dispatch = useAppDispatch()
+  const userId = useAppSelector((state) => state.auth.profile?._id)
+
+  
+  const onClickMy = () => {
+    dispatch(packsThunks.getPacks({ user_id: userId }))
+  }
+  const onClickAll = () => {
+    dispatch(packsThunks.getPacks({}))
+  }
+
   return (
     <Box
       display={"flex"}
@@ -17,8 +30,7 @@ export const PacksSettings = () => {
       padding=" 40px 0 24px 0 "
     >
       <SearchInput />
-      {/* <ShowPacksCards  onMy={true} setOnMy={() => {}} /> */}
-      <ShowPacksCards />
+      <ShowPacksCards onClickMy={onClickMy} onClickAll= {onClickAll} />
       <NumberOfCards />
       <ClearFilter clearFiltersHandler={() => {}} />
     </Box>
