@@ -10,6 +10,8 @@ import _ from "lodash"
 
 type PropsType = {
   fullWidth?: boolean
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  value?: string
 }
 
 export const SearchInput: FC<PropsType> = ({ fullWidth }) => {

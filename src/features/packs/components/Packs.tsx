@@ -1,7 +1,9 @@
 import { PacksSettings } from "./PacksSettings"
-import { PacksTable } from "../../../common/components/PacksTable"
-import { PackNavigator } from "../../../common/components/PackNavigator"
+import { PacksTable } from "../../../../common/components/PacksTable"
+import { PackNavigator } from "../../../../common/components/PackNavigator"
 import { Container } from "@mui/material"
+import { PacksTable } from "./PacksTable"
+import { PackNavigator } from "./PackNavigator"
 
 export const Packs = () => {
   return (

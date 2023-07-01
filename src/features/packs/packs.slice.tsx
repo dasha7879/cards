@@ -48,8 +48,8 @@ const upDatePack = createAppAsyncThunk<PackType, updatePackType>(
   async (cardsPack, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       const res = await packsAPI.upDatePack(cardsPack)
-      console.log(res.data.updatedCardsPack);
-      
+      console.log(res.data.updatedCardsPack)
+
       return res.data.updatedCardsPack
     })
   },
@@ -75,14 +75,18 @@ const slice = createSlice({
         state.cardPacks.unshift(action.payload)
       })
       .addCase(deletePack.fulfilled, (state, action) => {
-        state.cardPacks = state.cardPacks.filter((pack)=> pack._id !== action.payload._id)
+        state.cardPacks = state.cardPacks.filter(
+          (pack) => pack._id !== action.payload._id,
+        )
         // const index = state.cardPacks.findIndex(
         //   (pack) => pack._id === action.payload._id,
         // )
         // state.cardPacks.splice(index, 1)
       })
-      .addCase(upDatePack.fulfilled,(state, action)=>{
-        state.cardPacks.forEach(el=>{el._id === action.payload._id ? el.name = action.payload.name: el})
+      .addCase(upDatePack.fulfilled, (state, action) => {
+        state.cardPacks.forEach((el) => {
+          el._id === action.payload._id ? (el.name = action.payload.name) : el
+        })
       })
   },
 })

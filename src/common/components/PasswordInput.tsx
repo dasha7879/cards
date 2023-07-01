@@ -25,8 +25,6 @@ export const PasswordInput: React.FC<PasswordInputType> = ({
     <Box sx={{ mt: "30px", position: "relative" }}>
       <TextField
         {...register(name)}
-        // error={!!errors[name]}
-        // helperText={`${errors[name] ? errors[name]?.message : ''}`}
         label={text}
         type={`${visibilityEye ? "text" : "password"}`}
         variant="standard"

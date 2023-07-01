@@ -1,4 +1,4 @@
-import { thunkTryCatch } from './../../common/utils/thunkTryCatch';
+import { thunkTryCatch } from "./../../common/utils/thunkTryCatch"
 import { path } from "./../../common/routes/paths"
 import { createSlice } from "@reduxjs/toolkit"
 import {
@@ -23,8 +23,6 @@ const register = createAppAsyncThunk<any, ArgType>( // type
     })
   },
 )
-
-
 
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>(
   "auth/login",
@@ -75,7 +73,8 @@ const updateProfile = createAppAsyncThunk<
   })
 })
 
-const me = createAppAsyncThunk("auth/me", async (arg,thunkAPI) => { //типизация
+const me = createAppAsyncThunk("auth/me", async (arg, thunkAPI) => {
+  //типизация
   return thunkTryCatch(thunkAPI, async () => {
     const res = await authApi.me()
     return {
@@ -88,7 +87,7 @@ const setNewPassword = createAppAsyncThunk<
   { path: PathDirectionType; info: string },
   SetNewPassordType
 >("auth/setNewPassword", async (arg, thunkAPI) => {
-  return thunkTryCatch(thunkAPI, async ()=>{
+  return thunkTryCatch(thunkAPI, async () => {
     const res = await authApi.SetNewPassword(arg)
     return {
       path: "auth/login",

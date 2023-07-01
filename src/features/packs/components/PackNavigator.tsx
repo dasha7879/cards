@@ -4,8 +4,6 @@ import Typography from "@mui/material/Typography/Typography"
 import { useAppDispatch } from "../hooks"
 import { useState } from "react"
 import { packsThunks } from "../../features/packs/packs.slice"
-import { useNavigate } from "react-router-dom"
-import { path } from "../routes/paths"
 
 type PackNavigatorType = {
   title: string
@@ -16,16 +14,10 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
   buttonText,
 }) => {
   const dispatch = useAppDispatch()
+  const [disabled, setDisabled] = useState<boolean>(false)
 
-  const navigate = useNavigate()//потом убрать мб
-
-  // const [disabled, setDisabled] = useState<boolean>(false)
-
-  // const onclickHandler = () => {
-  //   dispatch(packsThunks.addPack({ name: "NewFolder" }))
-  // }
   const onclickHandler = () => {
-    navigate(path.NEWCARDPACK)
+    dispatch(packsThunks.addPack({ name: "NewFolder" }))
   }
 
   return (

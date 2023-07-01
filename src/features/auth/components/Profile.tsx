@@ -76,7 +76,7 @@ export const Profile = () => {
             >
               <Avatar
                 alt="user avatar"
-                src={img}
+                // src={img}
                 sx={{ width: "96px", height: "96px", mt: "30px" }}
               />
             </Badge>

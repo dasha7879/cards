@@ -1,5 +1,5 @@
 import { Button } from "@mui/material"
-import React  from "react"
+import React from "react"
 type SuperButtonPropsType = {
   width?: string
   variant?: "contained" | "text"
@@ -9,7 +9,7 @@ type SuperButtonPropsType = {
   startIcon?: any
   type?: "submit"
   onClick?: () => void
-  disabled?:boolean
+  disabled?: boolean
 }
 
 export const SuperButton: React.FC<SuperButtonPropsType> = ({
@@ -21,7 +21,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
   startIcon,
   onClick,
   type,
-  disabled
+  disabled,
 }) => {
   const buttonStyle = {
     width: `${width}`,
@@ -34,13 +34,13 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
 
   return (
     <Button
-      variant={ variant || "contained" }
+      variant={variant || "contained"}
       color={color || "primary"}
       sx={buttonStyle}
       startIcon={startIcon}
       type={type || "button"}
       onClick={onClickCallBack}
-      disabled = {disabled}
+      disabled={disabled}
     >
       {text}
     </Button>
