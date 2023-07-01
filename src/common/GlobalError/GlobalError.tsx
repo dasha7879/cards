@@ -11,7 +11,6 @@ export const GlobalError = () => {
   if (error !== null) {
     toast.error(error)
   }
-
   useEffect(() => {
     if (error !== null) {
       setTimeout(() => {

@@ -1,17 +1,18 @@
 import { createHashRouter } from "react-router-dom"
 import { path } from "./paths"
+import { Profile } from "../../features/auth/components/Profile"
 import { Cards } from "../../features/cards/components/Cards"
+import { Packs } from "../../features/packs/components/Packs"
 import { Learn } from "../../features/learn/components/Learn"
 import { CheckEmail } from "../../features/auth/components/checkEmail/CheckEmail"
+import { NewPasword } from "../../features/auth/components/NewPassword"
 import { ForgotPassword } from "../../features/auth/components/ForgotPassword"
+import { Login } from "../../features/auth/components/Login"
+import { Registration } from "../../features/auth/components/Registration"
 import App from "../../app/components/App"
 import { Auth } from "../hoc/Auth"
 import { RequireAuth } from "../hoc/RequireAuth"
-import { Packs } from "../../features/packs/components/Packs"
-import { Profile } from "../../features/auth/components/Profile"
-import { Login } from "@mui/icons-material"
-import { NewPasword } from "../../features/auth/components/NewPassword"
-import { Registration } from "../../features/auth/components/Registration"
+import { CreatePack } from "../components/CreatePack"
 
 export const router = createHashRouter([
   {
@@ -25,6 +26,10 @@ export const router = createHashRouter([
           {
             path: path.PACKS,
             element: <Packs />,
+          },
+          {
+            path: path.NEWCARDPACK,
+            element: <CreatePack/>,//потом убрать
           },
           {
             path: path.CARDS,

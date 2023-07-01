@@ -1,11 +1,11 @@
-import { Box, Grid, Paper, Stack, Typography, Checkbox } from "@mui/material"
+import { Grid, Paper, Stack, Typography } from "@mui/material"
 import { useForm } from "react-hook-form"
-import { EmailInput } from "../../../common/components/EmailInput.tsx"
-import { SuperButton } from "../../../common/components/SuperButton"
-import { authThunks } from "../auth.slice"
+import { EmailInput } from "../../../common/components/EmailInput.tsx.js"
+import { SuperButton } from "../../../common/components/SuperButton.js"
+import { authThunks } from "../auth.slice.js"
 import { useNavigate } from "react-router-dom"
-import { path } from "../../../common/routes/paths"
-import { useAppDispatch } from "../../../common/hooks/useAppDispatch"
+import { path } from "../../../common/routes/paths.js"
+import { useAppDispatch } from "../../../common/hooks/useAppDispatch.js"
 
 export type FormForgotData = {
   email: string
