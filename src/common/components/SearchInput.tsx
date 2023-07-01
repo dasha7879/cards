@@ -6,6 +6,7 @@ import { ChangeEvent, FC, useEffect, useState } from "react"
 import { useDebounce } from "../hooks/useDebounce"
 import { useAppDispatch } from "../hooks"
 import { packsThunks } from "../../features/packs/packs.slice"
+import _ from "lodash"
 
 type PropsType = {
   fullWidth?: boolean
@@ -14,16 +15,19 @@ type PropsType = {
 export const SearchInput: FC<PropsType> = ({ fullWidth }) => {
   const dispatch = useAppDispatch()
   const [value, setValue] = useState<string>("")
-  const debouncedValue = useDebounce<string>(value, 500)
+
+  function saveChanges(event: ChangeEvent<HTMLInputElement>) {
+    setValue(event.target.value)
+  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value)
+    _.debounce(saveChanges, 500)(event)
   }
 
   // Fetch API (optional)
   useEffect(() => {
-    dispatch(packsThunks.getPacks({ packName: debouncedValue }))
-  }, [debouncedValue])
+    dispatch(packsThunks.getPacks({ packName: value }))
+  }, [value])
 
   return (
     <Box marginTop={"20px"}>
