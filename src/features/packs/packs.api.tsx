@@ -25,7 +25,7 @@ export type idPackType = {
 }
 
 export type paramsType = {
-  packName?: ""
+  packName?: string
   min?: string
   max?: string
   sortPacks?: string

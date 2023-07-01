@@ -12,6 +12,7 @@ import { Registration } from "../../features/auth/components/Registration"
 import App from "../../app/components/App"
 import { Auth } from "../hoc/Auth"
 import { RequireAuth } from "../hoc/RequireAuth"
+import { CreatePack } from "../components/CreatePack"
 
 export const router = createHashRouter([
   {
@@ -25,6 +26,10 @@ export const router = createHashRouter([
           {
             path: path.PACKS,
             element: <Packs />,
+          },
+          {
+            path: path.NEWCARDPACK,
+            element: <CreatePack/>,//потом убрать
           },
           {
             path: path.CARDS,

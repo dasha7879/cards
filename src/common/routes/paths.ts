@@ -11,5 +11,6 @@ export const path={
     REGISTRATION: "/auth/registration",
     LEARN: "/learn",
     PACKS: "/packs",
+    NEWCARDPACK: '/packs/CreatePack',//потом убрать
     CARDS: "/cards",
 }

@@ -4,7 +4,7 @@ import { UseFormRegister } from "react-hook-form"
 
 
 type EmailInputType = {
-  name: "email" | "forgotPasswordEmail"
+  name: "email" | "forgotPasswordEmail" | "namePack"
   register: UseFormRegister<any>
 }
 
