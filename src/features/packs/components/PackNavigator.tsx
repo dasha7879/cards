@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box/Box"
-import { SuperButton } from "./SuperButton"
 import Typography from "@mui/material/Typography/Typography"
-import { useAppDispatch } from "../hooks"
 import { useState } from "react"
-import { packsThunks } from "../../features/packs/packs.slice"
+import { useAppDispatch } from "../../../common/hooks"
+import { packsThunks } from "../packs.slice"
+import { SuperButton } from "../../../common/components/SuperButton"
 
 type PackNavigatorType = {
   title: string

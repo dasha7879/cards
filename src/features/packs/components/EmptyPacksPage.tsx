@@ -1,8 +1,8 @@
 import { Container } from "@mui/material"
 import { SuperButton } from "../../../common/components/SuperButton"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
-import { PackNavigator } from "../../../common/components/PackNavigator"
 import { useAppDispatch } from "../../../common/hooks"
+import { PackNavigator } from "./PackNavigator"
 
 type EmptyPacksPageType = {}
 //понять вообзе что за компонента и зачем она нужна
