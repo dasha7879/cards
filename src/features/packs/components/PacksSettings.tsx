@@ -30,9 +30,7 @@ export const PacksSettings = () => {
       margin="0 auto"
       padding=" 40px 0 24px 0 "
     >
-      <SearchInput onChange={function (e: ChangeEvent<HTMLInputElement>): void {
-        throw new Error("Function not implemented.")
-      } } />
+      <SearchInput/>
       <ShowPacksCards onClickMy={onClickMy} onClickAll= {onClickAll} />
       <NumberOfCards />
       <ClearFilter clearFiltersHandler={() => {}} />

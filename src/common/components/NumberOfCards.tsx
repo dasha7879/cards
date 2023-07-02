@@ -1,27 +1,20 @@
 import Box from "@mui/material/Box"
 import Slider from "@mui/material/Slider/Slider"
 import Typography from "@mui/material/Typography/Typography"
+import { useEffect, useState } from "react"
+import _ from "lodash"
+import { useAppDispatch, useAppSelector } from "../hooks"
+import { packsThunks } from "../../features/packs/packs.slice"
 
-type NumberOfCardsType = {
-  disabled?: boolean
-  onChange?: (minCardsCount: string, maxCardsCount: string) => void
-  minMax?: number[]
-  setMinMax?: (value: number[]) => void
-}
+type NumberOfCardsType = {}
 
-const handleMouseUp = () => {
-  console.log("MouseOn")
-}
-const handleChange = () => {
-  console.log("OnChange")
-}
+export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
+  const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
+  const minCardsCount = useAppSelector((state) => state.packs.minCardsCount)
 
-export const NumberOfCards: React.FC<NumberOfCardsType> = ({
-  disabled,
-  onChange,
-  minMax,
-  setMinMax,
-}) => {
+  const [value, setValue] = useState<number[]>([minCardsCount, maxCardsCount])
+  const dispatch = useAppDispatch()
+
   const boxSx = {
     width: "63px",
     height: "36px",
@@ -39,6 +32,20 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({
     textAlign: "center",
   }
 
+  const saveChanges = (event: Event, newValue: number[]) => {
+    setValue(newValue as number[])
+  }
+
+  let resultDebounced = _.debounce(saveChanges, 500)
+
+  const handleChange = (event: Event, newValue: number[]) => {
+    resultDebounced(event, newValue)
+  }
+
+  useEffect(() => {
+    dispatch(packsThunks.getPacks({ min: `${value[0]}`, max: `${value[1]}` }))
+  }, [handleChange])
+
   return (
     <Box
       sx={{
@@ -53,17 +60,17 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({
       </Typography>
       <Box sx={{ width: 300, display: "flex", alignItems: "center" }}>
         <Box sx={boxSx}>
-          <Typography sx={typographySx}>{1}</Typography>
+          <Typography sx={typographySx}>{`${value[0]}`}</Typography>
         </Box>
         <Slider
-          value={minMax}
-          onMouseUp={handleMouseUp}
-          onChange={handleChange}
+          max={10}
+          min={0}
           sx={{ m: "0 20px" }}
-          disabled={disabled}
+          value={value}
+          onChange={handleChange} // think about type
         />
         <Box sx={boxSx}>
-          <Typography sx={typographySx}>{3}</Typography>
+          <Typography sx={typographySx}>{`${value[1]}`}</Typography>
         </Box>
       </Box>
     </Box>
