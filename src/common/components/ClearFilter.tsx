@@ -2,13 +2,18 @@ import React, { memo } from "react"
 import Box from "@mui/material/Box"
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"
 import IconButton from "@mui/material/IconButton"
+import { useAppDispatch, useAppSelector } from "../hooks"
+import { packActions, packsThunks } from "../../features/packs/packs.slice"
 
 type ClearFilterPropsType = {
   disabled?: boolean
-  clearFiltersHandler: () => void
 }
 export const ClearFilter: React.FC<ClearFilterPropsType> = memo(
-  ({ clearFiltersHandler, disabled }) => {
+  ({ disabled }) => {
+    const dispatch = useAppDispatch()
+    const params = useAppSelector((state) => state.packs.params)
+ 
+
     const boxSx = {
       width: "36px",
       height: "36px",
@@ -26,8 +31,36 @@ export const ClearFilter: React.FC<ClearFilterPropsType> = memo(
     }
 
     const onClickHandler = () => {
-      // clearFiltersHandler()
-      console.log("filter")
+      dispatch(
+        packActions.setParams({
+          ...params,
+          packName: undefined,
+          min: '0',
+          max: '4',
+          sortPacks: undefined,
+          page: undefined,
+          pageCount: undefined,
+          user_id: undefined,
+          block: undefined,
+        }),
+      )
+
+      console.log(params)
+
+      dispatch(
+        packsThunks.getPacks({
+          ...params,
+          packName: undefined,
+          min: '0',
+          max: '4',
+          sortPacks: undefined,
+          page: undefined,
+          pageCount: undefined,
+          user_id: undefined,
+          block: undefined,
+        }),
+      )
+      console.log(params)
     }
 
     return (

@@ -6,13 +6,15 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
-import { useEffect } from "react"
-import { styled } from "@mui/material"
+import { useEffect, useState } from "react"
+import { Button, IconButton, styled } from "@mui/material"
 import { CardsPagination } from "../../../common/components/CardsPagination"
 import { ActionButtons } from "../../../common/components/ActionButtons"
 import { useAppDispatch, useAppSelector } from "../../../common/hooks"
 import { packsThunks } from "../packs.slice"
 import { packSelector } from "../packsSelector"
+import SwapVertSharpIcon from "@mui/icons-material/SwapVertSharp"
+import { AgInputDateField } from "ag-grid-community"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,12 +32,14 @@ type PacksTablePropsType = {}
 export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   const packs = useAppSelector(packSelector)
   const user = useAppSelector((state) => state.auth.profile)
-  // const isSearch = "l"
+  const params = useAppSelector((state)=>state.packs.params)
   const dispatch = useAppDispatch()
+  // const [allPacksFl, setAllPacksFl] = useState(true)
 
   useEffect(() => {
-    dispatch(packsThunks.getPacks({}))
-    // dispatch(packsThunks.getPacks({packName:isSearch}))
+    dispatch(
+      packsThunks.getPacks(params),
+    )
   }, [])
 
   const onClickDelete = (id: string) => {
@@ -44,6 +48,15 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   }
   const onClickEdit = (_id: string, name: string) => {
     dispatch(packsThunks.upDatePack({ _id, name }))
+  }
+
+  const onClickSort = (name: string, _sort: number) => {
+    const sort = `${_sort}${name.toLowerCase()}`
+    dispatch(
+      packsThunks.getPacks({
+        sortPacks: sort,
+      }),
+    )
   }
 
   const columns = ["Name", "Cards", "Updated", "Created", "Actions"]
@@ -56,8 +69,19 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
             <TableHead sx={{ bgcolor: "red" }}>
               <TableRow>
                 {columns.map((column, index) => (
-                  <StyledTableCell key={column[index]}>
+                  <StyledTableCell key={columns[index]}>
                     {column}
+                    {column !== "Actions" ? (
+                      <IconButton
+                        aria-label="sort"
+                        size="small"
+                        onClick={() => onClickSort(column, 0)}
+                      >
+                        <SwapVertSharpIcon />
+                      </IconButton>
+                    ) : (
+                      ""
+                    )}
                   </StyledTableCell>
                 ))}
               </TableRow>

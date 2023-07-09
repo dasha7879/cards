@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import {
   ArgNewCardsPackType,
   GetPackResponseType,
@@ -64,8 +64,22 @@ const slice = createSlice({
     minCardsCount: 0,
     page: 1,
     pageCount: 4,
+    params: {
+      packName: "",
+      min: "0",
+      max: "",
+      sortPacks: "",
+      page: "",
+      pageCount: "",
+      user_id: "",
+      block: false,
+    } as paramsType,
   },
-  reducers: {},
+  reducers: {
+    setParams: (state, action: PayloadAction<paramsType>) => {
+      state.params = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getPacks.fulfilled, (state, action) => {
@@ -91,5 +105,6 @@ const slice = createSlice({
   },
 })
 
+export const packActions = slice.actions
 export const packsReducer = slice.reducer
 export const packsThunks = { getPacks, addPack, deletePack, upDatePack }

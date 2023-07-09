@@ -4,14 +4,16 @@ import Typography from "@mui/material/Typography/Typography"
 import { useEffect, useState } from "react"
 import _ from "lodash"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { packsThunks } from "../../features/packs/packs.slice"
+import { packsThunks, packActions } from "../../features/packs/packs.slice"
 
-type NumberOfCardsType = {}
+type NumberOfCardsType = {
+ 
+}
 
 export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
   const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
   const minCardsCount = useAppSelector((state) => state.packs.minCardsCount)
-
+  const params = useAppSelector((state) => state.packs.params)
   const [value, setValue] = useState<number[]>([minCardsCount, maxCardsCount])
   const dispatch = useAppDispatch()
 
@@ -32,19 +34,28 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
     textAlign: "center",
   }
 
-  const saveChanges = (event: Event, newValue: number[]) => {
-    setValue(newValue as number[])
+  const saveChanges = () => {
+    dispatch(
+      packActions.setParams({
+        ...params,
+        min: `${value[0]}`,
+        max: `${value[1]}`,
+      }),
+    )
+    dispatch(
+      packsThunks.getPacks({
+        ...params,
+        min: `${value[0]}`,
+        max: `${value[1]}`,
+      }),
+    )
   }
 
   let resultDebounced = _.debounce(saveChanges, 500)
 
-  const handleChange = (event: Event, newValue: number[]) => {
-    resultDebounced(event, newValue)
+  const handleChange = (event: Event, newValue: number[] | number) => {
+    setValue(newValue as number[])
   }
-
-  useEffect(() => {
-    dispatch(packsThunks.getPacks({ min: `${value[0]}`, max: `${value[1]}` }))
-  }, [handleChange])
 
   return (
     <Box
@@ -67,7 +78,8 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
           min={0}
           sx={{ m: "0 20px" }}
           value={value}
-          onChange={handleChange} // think about type
+          onChange={handleChange}
+          onChangeCommitted={resultDebounced}
         />
         <Box sx={boxSx}>
           <Typography sx={typographySx}>{`${value[1]}`}</Typography>
