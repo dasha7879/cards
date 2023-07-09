@@ -5,7 +5,8 @@ import { useEffect, useState } from "react"
 import _ from "lodash"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { packsThunks, packActions } from "../../features/packs/packs.slice"
-
+import IconButton from "@mui/material/IconButton/IconButton"
+import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"
 type NumberOfCardsType = {
  
 }
@@ -57,6 +58,40 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
     setValue(newValue as number[])
   }
 
+  const onClickHandler = () => {
+    dispatch(
+      packActions.setParams({
+        ...params,
+        packName: undefined,
+        min: '0',
+        max: '4',
+        sortPacks: undefined,
+        page: undefined,
+        pageCount: undefined,
+        user_id: undefined,
+        block: undefined,
+      }),
+    )
+
+    console.log(params)
+
+    dispatch(
+      packsThunks.getPacks({
+        ...params,
+        packName: undefined,
+        min: '0',
+        max: '4',
+        sortPacks: undefined,
+        page: undefined,
+        pageCount: undefined,
+        user_id: undefined,
+        block: undefined,
+      }),
+    )
+    setValue([minCardsCount, maxCardsCount])
+  }
+
+
   return (
     <Box
       sx={{
@@ -84,6 +119,13 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
         <Box sx={boxSx}>
           <Typography sx={typographySx}>{`${value[1]}`}</Typography>
         </Box>
+        <IconButton
+          sx={{ width: "50px" }}
+          onClick={onClickHandler}
+        >
+          <FilterAltOffIcon />
+        </IconButton>
+  
       </Box>
     </Box>
   )

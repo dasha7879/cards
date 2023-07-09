@@ -35,7 +35,7 @@ export const PacksSettings = () => {
       <SearchInput />
       <ShowPacksCards onClickMy={onClickMy} onClickAll={onClickAll} />
       <NumberOfCards />
-      <ClearFilter />
+      {/* <ClearFilter /> */}
     </Box>
   )
 }
