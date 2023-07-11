@@ -4,22 +4,28 @@ import { ShowPacksCards } from "../../../common/components/ShowPacksCards"
 import { SearchInput } from "../../../common/components/SearchInput"
 import Box from "@mui/material/Box"
 import { useAppDispatch, useAppSelector } from "../../../common/hooks"
-import { packActions, packsThunks } from "../packs.slice"
+import { dataActions, dataThunks } from "../packs.slice"
+import { useState } from "react"
 
 export const PacksSettings = () => {
   const dispatch = useAppDispatch()
   const userId = useAppSelector((state) => state.auth.profile?._id)
-  const params = useAppSelector((state) => state.packs.params)
+  const params = useAppSelector((state) => state.data.params)
+
+  // const [isDisabledMy,setDisabledMy]=useState<boolean>(false)
+  // const [isDisabledAll,setDisabledAll]=useState<boolean>(false)
 
   const onClickMy = () => {
-    // console.log(params)
-    dispatch(packActions.setParams({ ...params, user_id: userId }))
-    //
-    dispatch(packsThunks.getPacks({ ...params, user_id: userId }))
+    dispatch(dataActions.setParams({ ...params, user_id: userId }))
+    dispatch(dataThunks.getData({ ...params, user_id: userId }))
+    // setDisabledMy(true)
+    // setDisabledAll(false)
   }
   const onClickAll = () => {
-    dispatch(packActions.setParams({ ...params, user_id: undefined }))
-    dispatch(packsThunks.getPacks({ ...params, user_id: undefined }))
+    dispatch(dataActions.setParams({ ...params, user_id: undefined }))
+    dispatch(dataThunks.getData({ ...params, user_id: undefined }))
+    // setDisabledAll(true)
+    // setDisabledMy(false)
   }
 
   return (
@@ -35,7 +41,7 @@ export const PacksSettings = () => {
       <SearchInput />
       <ShowPacksCards onClickMy={onClickMy} onClickAll={onClickAll} />
       <NumberOfCards />
-      {/* <ClearFilter /> */}
+      <ClearFilter />
     </Box>
   )
 }

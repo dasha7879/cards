@@ -4,17 +4,15 @@ import Typography from "@mui/material/Typography/Typography"
 import { useEffect, useState } from "react"
 import _ from "lodash"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { packsThunks, packActions } from "../../features/packs/packs.slice"
+import { dataThunks, dataActions } from "../../features/packs/packs.slice"
 import IconButton from "@mui/material/IconButton/IconButton"
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"
-type NumberOfCardsType = {
- 
-}
+type NumberOfCardsType = {}
 
 export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
-  const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
-  const minCardsCount = useAppSelector((state) => state.packs.minCardsCount)
-  const params = useAppSelector((state) => state.packs.params)
+  const state = useAppSelector((state) => state.data)
+  const { minCardsCount, maxCardsCount, params } = state
+  const { min, max } = params
   const [value, setValue] = useState<number[]>([minCardsCount, maxCardsCount])
   const dispatch = useAppDispatch()
 
@@ -35,16 +33,31 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
     textAlign: "center",
   }
 
+  useEffect(() => {
+    console.log("lala")
+    dispatch(
+      dataActions.setParams({
+        ...params,
+        min: `${minCardsCount}`,
+        max: `${maxCardsCount}`,
+      }),
+    )
+  }, [minCardsCount, maxCardsCount])
+
+  useEffect(() => {
+    setValue([Number(min), Number(max)])
+  }, [max, min])
+
   const saveChanges = () => {
     dispatch(
-      packActions.setParams({
+      dataActions.setParams({
         ...params,
         min: `${value[0]}`,
         max: `${value[1]}`,
       }),
     )
     dispatch(
-      packsThunks.getPacks({
+      dataThunks.getData({
         ...params,
         min: `${value[0]}`,
         max: `${value[1]}`,
@@ -57,40 +70,6 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
   const handleChange = (event: Event, newValue: number[] | number) => {
     setValue(newValue as number[])
   }
-
-  const onClickHandler = () => {
-    dispatch(
-      packActions.setParams({
-        ...params,
-        packName: undefined,
-        min: '0',
-        max: '4',
-        sortPacks: undefined,
-        page: undefined,
-        pageCount: undefined,
-        user_id: undefined,
-        block: undefined,
-      }),
-    )
-
-    console.log(params)
-
-    dispatch(
-      packsThunks.getPacks({
-        ...params,
-        packName: undefined,
-        min: '0',
-        max: '4',
-        sortPacks: undefined,
-        page: undefined,
-        pageCount: undefined,
-        user_id: undefined,
-        block: undefined,
-      }),
-    )
-    setValue([minCardsCount, maxCardsCount])
-  }
-
 
   return (
     <Box
@@ -109,7 +88,7 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
           <Typography sx={typographySx}>{`${value[0]}`}</Typography>
         </Box>
         <Slider
-          max={10}
+          max={maxCardsCount}
           min={0}
           sx={{ m: "0 20px" }}
           value={value}
@@ -119,13 +98,12 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
         <Box sx={boxSx}>
           <Typography sx={typographySx}>{`${value[1]}`}</Typography>
         </Box>
-        <IconButton
+        {/* <IconButton
           sx={{ width: "50px" }}
           onClick={onClickHandler}
         >
           <FilterAltOffIcon />
-        </IconButton>
-  
+        </IconButton> */}
       </Box>
     </Box>
   )

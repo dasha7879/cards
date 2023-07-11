@@ -2,7 +2,7 @@ import Box from "@mui/material/Box/Box"
 import Typography from "@mui/material/Typography/Typography"
 import { useState } from "react"
 import { useAppDispatch } from "../../../common/hooks"
-import { packsThunks } from "../packs.slice"
+import { dataThunks } from "../packs.slice"
 import { SuperButton } from "../../../common/components/SuperButton"
 
 type PackNavigatorType = {
@@ -17,7 +17,7 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
   const [disabled, setDisabled] = useState<boolean>(false)
 
   const onclickHandler = () => {
-    dispatch(packsThunks.addPack({ name: "NewFolder" }))
+    dispatch(dataThunks.addPack({ name: "NewFolder" }))
   }
 
   return (

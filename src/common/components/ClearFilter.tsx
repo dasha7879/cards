@@ -3,7 +3,7 @@ import Box from "@mui/material/Box"
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"
 import IconButton from "@mui/material/IconButton"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { packActions, packsThunks } from "../../features/packs/packs.slice"
+import { dataActions, dataThunks } from "../../features/packs/packs.slice"
 
 type ClearFilterPropsType = {
   disabled?: boolean
@@ -11,9 +11,8 @@ type ClearFilterPropsType = {
 export const ClearFilter: React.FC<ClearFilterPropsType> = memo(
   ({ disabled }) => {
     const dispatch = useAppDispatch()
-    const params = useAppSelector((state) => state.packs.params)
- 
-
+    const state = useAppSelector((state) => state.data)
+    const { minCardsCount, maxCardsCount, params } = state
     const boxSx = {
       width: "36px",
       height: "36px",
@@ -32,11 +31,11 @@ export const ClearFilter: React.FC<ClearFilterPropsType> = memo(
 
     const onClickHandler = () => {
       dispatch(
-        packActions.setParams({
+        dataActions.setParams({
           ...params,
           packName: undefined,
-          min: '0',
-          max: '4',
+          min: minCardsCount.toString(),
+          max: maxCardsCount.toString(),
           sortPacks: undefined,
           page: undefined,
           pageCount: undefined,
@@ -44,15 +43,13 @@ export const ClearFilter: React.FC<ClearFilterPropsType> = memo(
           block: undefined,
         }),
       )
-
-      console.log(params)
 
       dispatch(
-        packsThunks.getPacks({
+        dataThunks.getData({
           ...params,
           packName: undefined,
-          min: '0',
-          max: '4',
+          min: "0",
+          max: "4",
           sortPacks: undefined,
           page: undefined,
           pageCount: undefined,
@@ -60,7 +57,6 @@ export const ClearFilter: React.FC<ClearFilterPropsType> = memo(
           block: undefined,
         }),
       )
-      console.log(params)
     }
 
     return (

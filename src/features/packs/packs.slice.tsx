@@ -11,7 +11,7 @@ import {
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk"
 import { thunkTryCatch } from "../../common/utils/thunkTryCatch"
 
-const getPacks = createAppAsyncThunk<GetPackResponseType, paramsType>(
+const getData = createAppAsyncThunk<GetPackResponseType, paramsType>(
   "packs/getPacks",
   async (params, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
@@ -60,7 +60,7 @@ const slice = createSlice({
   initialState: {
     cardPacks: [] as PackType[],
     cardPacksTotalCount: 14,
-    maxCardsCount: 4,
+    maxCardsCount: 0,
     minCardsCount: 0,
     page: 1,
     pageCount: 4,
@@ -79,11 +79,14 @@ const slice = createSlice({
     setParams: (state, action: PayloadAction<paramsType>) => {
       state.params = action.payload
     },
+    getParams: (state, action: PayloadAction<paramsType>) => {
+      state.params = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getPacks.fulfilled, (state, action) => {
-        state.cardPacks = action.payload.cardPacks
+      .addCase(getData.fulfilled, (state, action) => {
+        return state = { ...state, ...action.payload }
       })
       .addCase(addPack.fulfilled, (state, action) => {
         state.cardPacks.unshift(action.payload)
@@ -105,6 +108,6 @@ const slice = createSlice({
   },
 })
 
-export const packActions = slice.actions
-export const packsReducer = slice.reducer
-export const packsThunks = { getPacks, addPack, deletePack, upDatePack }
+export const dataActions = slice.actions
+export const dataReducer = slice.reducer
+export const dataThunks = { getData, addPack, deletePack, upDatePack }

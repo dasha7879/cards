@@ -4,6 +4,9 @@ export const packsAPI = {
   getPacks: (params: paramsType) => {
     return instance.get<GetPackResponseType>("cards/pack", { params })
   },
+  getData: (params: paramsType) => {
+    return instance.get<GetPackResponseType>("cards/pack", { params })
+  },
   addPack: (cardsPack: ArgNewCardsPackType) => {
     return instance.post<CommonResponseType>("cards/pack", { cardsPack })
   },

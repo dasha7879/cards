@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography/Typography"
 import { useForm } from "react-hook-form"
 import { SuperButton } from "./SuperButton"
 import Stack from "@mui/material/Stack/Stack"
-import { packsThunks } from "../../features/packs/packs.slice"
+import { dataThunks } from "../../features/packs/packs.slice"
 import { useAppDispatch } from "../hooks"
 import { path } from "../routes/paths"
 import { useNavigate } from "react-router-dom"
@@ -20,9 +20,8 @@ export const CreatePack: React.FC<CreatePackType> = ({}) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-
   const CreateNewPack = (data: FormData) => {
-    dispatch(packsThunks.addPack({ name: data.namePack }))
+    dispatch(dataThunks.addPack({ name: data.namePack }))
     navigate(path.PACKS)
   }
 
@@ -72,7 +71,7 @@ export const CreatePack: React.FC<CreatePackType> = ({}) => {
             {...register()}
           /> */}
           поработать над лейблом и компонентой
-          <EmailInput name="namePack" register={register} /> 
+          <EmailInput name="namePack" register={register} />
           <SuperButton
             width={"100%"}
             text={"Add New Pack"}

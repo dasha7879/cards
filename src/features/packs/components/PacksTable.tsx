@@ -6,15 +6,15 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
-import { useEffect, useState } from "react"
-import { Button, IconButton, styled } from "@mui/material"
+import { useEffect } from "react"
+import {  IconButton, styled } from "@mui/material"
 import { CardsPagination } from "../../../common/components/CardsPagination"
 import { ActionButtons } from "../../../common/components/ActionButtons"
 import { useAppDispatch, useAppSelector } from "../../../common/hooks"
-import { packsThunks } from "../packs.slice"
-import { packSelector } from "../packsSelector"
+import { dataActions, dataThunks } from "../packs.slice"
+import { dataSelector } from "../packsSelector"
 import SwapVertSharpIcon from "@mui/icons-material/SwapVertSharp"
-import { AgInputDateField } from "ag-grid-community"
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,36 +30,58 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 type PacksTablePropsType = {}
 
 export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
-  const packs = useAppSelector(packSelector)
+  const data = useAppSelector(dataSelector)
   const user = useAppSelector((state) => state.auth.profile)
-  const params = useAppSelector((state)=>state.packs.params)
+  const params = useAppSelector((state) => state.data.params)
   const dispatch = useAppDispatch()
-  // const [allPacksFl, setAllPacksFl] = useState(true)
 
   useEffect(() => {
-    dispatch(
-      packsThunks.getPacks(params),
-    )
+    dispatch(dataThunks.getData(params))
   }, [])
 
   const onClickDelete = (id: string) => {
-    dispatch(packsThunks.deletePack({ id }))
-    dispatch(packsThunks.getPacks({ user_id: user?._id }))
+    dispatch(dataThunks.deletePack({ id }))
+    dispatch(dataThunks.getData({ user_id: user?._id }))
   }
   const onClickEdit = (_id: string, name: string) => {
-    dispatch(packsThunks.upDatePack({ _id, name }))
+    dispatch(dataThunks.upDatePack({ _id, name }))
   }
 
-  const onClickSort = (name: string, _sort: number) => {
-    const sort = `${_sort}${name.toLowerCase()}`
+  const onClickSort = (name: string) => {
+    // to CamelCase
+    const currentType = params.sortPacks?.[0]
+    const currentName = params.sortPacks?.slice(1)
+
+    name = name
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase()
+      })
+      .replace(/\s+/g, "")
+
+    let sort
+
+    if (currentName === name) {
+      sort = `${currentType == "0" ? 1 : 0}${name}`
+    } else {
+      sort = `${0}${name}`
+    }
+
     dispatch(
-      packsThunks.getPacks({
+      dataActions.setParams({
+        ...params,
+        sortPacks: sort,
+      }),
+    )
+
+    dispatch(
+      dataThunks.getData({
+        ...params,
         sortPacks: sort,
       }),
     )
   }
 
-  const columns = ["Name", "Cards", "Updated", "Created", "Actions"]
+  const columns = ["Name", "Cards count", "Updated", "Created", "Actions"]
 
   return (
     <>
@@ -75,7 +97,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
                       <IconButton
                         aria-label="sort"
                         size="small"
-                        onClick={() => onClickSort(column, 0)}
+                        onClick={() => onClickSort(column)}
                       >
                         <SwapVertSharpIcon />
                       </IconButton>
@@ -87,7 +109,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {packs.cardPacks?.map((pack) => {
+              {data.cardPacks?.map((pack) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={pack._id}>
                     <TableCell>{pack.name}</TableCell>
