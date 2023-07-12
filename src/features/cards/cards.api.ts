@@ -14,11 +14,11 @@ export const cardsAPI = {
     return instance.put<CommonResponseCardsType>("cards/card", { cards })
   },
   updateCardsGrade: (updatedGrade: UpdateCardGradeType) => {
-    return instance.put<ResponseGradeType>("cards/card", { updatedGrade })
+    return instance.put<ResponseGradeType>("cards/grade", { updatedGrade })
   },
 }
 
-type CardsParamsType = {
+export type CardsParamsType = {
   cardAnswer?: string
   cardQuestion?: string
   cardsPack_id: string
@@ -28,7 +28,7 @@ type CardsParamsType = {
   page?: number
   pageCount?: number
 }
-type GetCardsResponseType = {
+export type GetCardsResponseType = {
   cards: CardType[]
   cardsTotalCount: 3
   maxGrade: number
@@ -36,9 +36,16 @@ type GetCardsResponseType = {
   page: number
   pageCount: number
   packUserId: string
+  packName: string
+  packPrivate: boolean
+  packDeckCover: null
+  packCreated: string
+  packUpdated: string
+  token: string
+  tokenDeathTime: string
 }
 
-type CardType = {
+export type CardType = {
   _id: string
   cardsPack_id: string
   user_id: string
