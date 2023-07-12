@@ -5,8 +5,6 @@ import { useEffect, useState } from "react"
 import _ from "lodash"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { dataThunks, dataActions } from "../../features/packs/packs.slice"
-import IconButton from "@mui/material/IconButton/IconButton"
-import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"
 type NumberOfCardsType = {}
 
 export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {

@@ -33,6 +33,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   const data = useAppSelector(dataSelector)
   const user = useAppSelector((state) => state.auth.profile)
   const params = useAppSelector((state) => state.data.params)
+  const cardPacksTotalCount = useAppSelector((state)=> state.data.cardPacksTotalCount)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -129,7 +130,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
           </Table>
         </TableContainer>
       </Paper>
-      <CardsPagination count={10} />
+      <CardsPagination />
     </>
   )
 }

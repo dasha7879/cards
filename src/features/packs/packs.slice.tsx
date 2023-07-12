@@ -78,10 +78,7 @@ const slice = createSlice({
   reducers: {
     setParams: (state, action: PayloadAction<paramsType>) => {
       state.params = action.payload
-    },
-    getParams: (state, action: PayloadAction<paramsType>) => {
-      state.params = action.payload
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
