@@ -7,13 +7,13 @@ export const cardsAPI = {
   addCard: (cards: ArgNewCardsType) => {
     return instance.post<CommonResponseCardsType>("cards/card", { cards })
   },
-  deleteCard: (params: idCardType) => {
+  deleteCard: (params: IdCardType) => {
     return instance.delete<CommonResponseCardsType>("cards/card", { params })
   },
-  updateCard: (cards: updateCardType) => {
+  updateCard: (cards: UpdateCardType) => {
     return instance.put<CommonResponseCardsType>("cards/card", { cards })
   },
-  updateCardsGrade: (updatedGrade: updateCardGradeType) => {
+  updateCardsGrade: (updatedGrade: UpdateCardGradeType) => {
     return instance.put<ResponseGradeType>("cards/card", { updatedGrade })
   },
 }
@@ -29,7 +29,7 @@ type CardsParamsType = {
   pageCount?: number
 }
 type GetCardsResponseType = {
-  cards: cardType[]
+  cards: CardType[]
   cardsTotalCount: 3
   maxGrade: number
   minGrade: number
@@ -38,7 +38,7 @@ type GetCardsResponseType = {
   packUserId: string
 }
 
-type cardType = {
+type CardType = {
   _id: string
   cardsPack_id: string
   user_id: string
@@ -67,16 +67,16 @@ type ArgNewCardsType = {
   answerVideo: string
 }
 
-export type idCardType = {
+export type IdCardType = {
   id: string
 }
 
-export type updateCardType = {
+export type UpdateCardType = {
   _id: string
   question: string
 }
 
-export type updateCardGradeType = {
+export type UpdateCardGradeType = {
   grade: number // 1-5
   card_id: string
 }
@@ -93,7 +93,7 @@ export type ResponseGradeType = {
 }
 
 export type CommonResponseCardsType = {
-  [x in "newCard" | "deletedCard" | "updatedCard"]: cardType
+  [x in "newCard" | "deletedCard" | "updatedCard"]: CardType
 } & {
   token: string
   tokenDeathTime: string
