@@ -1,15 +1,29 @@
+import { thunkTryCatch } from './../../common/utils/thunkTryCatch';
 import { createSlice } from "@reduxjs/toolkit"
-import { CardType, CardsParamsType } from "./cards.api"
+import { CardType, CardsParamsType, cardsAPI } from "./cards.api"
+import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk"
+
+const getCards = createAppAsyncThunk<any,any>(
+    "cards/getCards",
+    async(params,thunkAPI)=>{
+        return thunkTryCatch(thunkAPI, async()=>{
+            const res = await cardsAPI.getCards(params)
+            return res.data
+        })
+    }
+)
+
 
 const slice = createSlice({
   name: "cards",
   initialState: {
-    cardPacks: [] as CardType[],
-    cardPacksTotalCount: 14,
-    maxCardsCount: 4,
-    minCardsCount: 0,
-    page: 1,
-    pageCount: 4,
+    cards: [] as CardType[],
+    cardsTotalCount: 3 ,
+    maxGrade: 4.987525071790364 ,
+    minGrade: 2.0100984354076568 ,
+    page: 1 ,
+    pageCount: 4 ,
+    packUserId: "",
     params:{
         cardAnswer: "",
         cardQuestion: "",
@@ -22,7 +36,13 @@ const slice = createSlice({
     } as CardsParamsType
   },
   reducers: {},
-  extraReducers: () => {},
+  extraReducers: (builder) => {
+    builder
+    .addCase(getCards.fulfilled, (state,action)=>{
+        state.cards = action.payload
+    })
+  },
 })
 
 export const cardsReducer = slice.reducer
+export const cardsThunks = {getCards}
