@@ -8,28 +8,27 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { dataActions, dataThunks } from "../../features/packs/packs.slice"
 
-export type CardsPaginationPropsType = {
-}
+export type PacksPaginationPropsType = {}
 
-export const CardsPagination: React.FC<CardsPaginationPropsType> = ({
-}) => {
+export const PacksPagination: React.FC<PacksPaginationPropsType> = ({}) => {
   const state = useAppSelector((state) => state.data)
-  const {page,pageCount,cardPacksTotalCount,params} = state
+  const { page, pageCount, cardPacksTotalCount, params } = state
   const dispatch = useAppDispatch()
 
-
-  const [pageCountSelect,setPage] = useState<number>(pageCount)
-  const [currentPage,setCurrentPage] = useState<number>(1)
+  const [pageCountSelect, setPage] = useState<number>(pageCount)
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   const handleChange = (event: SelectChangeEvent) => {
     setPage(Number(event.target.value))
   }
-  const onChangeCurrentPage = (event: ChangeEvent<unknown>, newPage: number) => {
+  const onChangeCurrentPage = (
+    event: ChangeEvent<unknown>,
+    newPage: number,
+  ) => {
     setCurrentPage(newPage)
-    dispatch(dataActions.setParams({...params, page: newPage.toString()}))
-    dispatch(dataThunks.getData({...params, page: newPage.toString()}))
+    dispatch(dataActions.setParams({ ...params, page: newPage.toString() }))
+    dispatch(dataThunks.getData({ ...params, page: newPage.toString() }))
   }
-
 
   return (
     <>
@@ -42,7 +41,7 @@ export const CardsPagination: React.FC<CardsPaginationPropsType> = ({
       >
         <Pagination
           page={currentPage}
-          onChange = {onChangeCurrentPage}
+          onChange={onChangeCurrentPage}
           // defaultPage={1}
           count={cardPacksTotalCount}
           shape="rounded"

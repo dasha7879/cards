@@ -7,14 +7,13 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import { useEffect } from "react"
-import {  IconButton, styled } from "@mui/material"
-import { CardsPagination } from "../../../common/components/CardsPagination"
+import { IconButton, styled } from "@mui/material"
+import { PacksPagination } from "../../../common/components/PacksPagination"
 import { ActionButtons } from "../../../common/components/ActionButtons"
 import { useAppDispatch, useAppSelector } from "../../../common/hooks"
 import { dataActions, dataThunks } from "../packs.slice"
 import { dataSelector } from "../packsSelector"
 import SwapVertSharpIcon from "@mui/icons-material/SwapVertSharp"
-
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,7 +32,9 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   const data = useAppSelector(dataSelector)
   const user = useAppSelector((state) => state.auth.profile)
   const params = useAppSelector((state) => state.data.params)
-  const cardPacksTotalCount = useAppSelector((state)=> state.data.cardPacksTotalCount)
+  const cardPacksTotalCount = useAppSelector(
+    (state) => state.data.cardPacksTotalCount,
+  )
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -130,7 +131,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
           </Table>
         </TableContainer>
       </Paper>
-      <CardsPagination />
+      <PacksPagination />
     </>
   )
 }
