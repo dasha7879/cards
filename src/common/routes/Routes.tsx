@@ -1,7 +1,6 @@
 import { createHashRouter } from "react-router-dom"
 import { path } from "./paths"
 import { Profile } from "../../features/auth/components/Profile"
-import { Cards } from "../../features/cards/components/Cards"
 import { Packs } from "../../features/packs/components/Packs"
 import { Learn } from "../../features/learn/components/Learn"
 import { CheckEmail } from "../../features/auth/components/checkEmail/CheckEmail"
@@ -13,6 +12,7 @@ import App from "../../app/components/App"
 import { Auth } from "../hoc/Auth"
 import { RequireAuth } from "../hoc/RequireAuth"
 import { CreatePack } from "../components/CreatePack"
+import { Cards } from "../../features/cards/Cards"
 
 export const router = createHashRouter([
   {
@@ -33,7 +33,7 @@ export const router = createHashRouter([
           },
           {
             path: path.CARDS,
-            element: <Cards />,
+            element: <Cards/>,
           },
           {
             path: path.LEARN,

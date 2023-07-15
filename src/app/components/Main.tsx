@@ -6,6 +6,7 @@ import Box from "@mui/material/Box"
 import { authThunks } from "../../features/auth/auth.slice"
 import { useAppDispatch, useAppState } from "../../common/hooks"
 import { Preloader } from "../../common/components/Preloader"
+import { CardsTable } from "../../features/cards/components/CardsTable"
 
 export const Main = () => {
   const dispatch = useAppDispatch()

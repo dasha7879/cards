@@ -1,9 +1,9 @@
 import { thunkTryCatch } from './../../common/utils/thunkTryCatch';
-import { createSlice } from "@reduxjs/toolkit"
-import { CardType, CardsParamsType, cardsAPI } from "./cards.api"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { CardType, CardsParamsType, GetCardsResponseType, cardsAPI } from "./cards.api"
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk"
 
-const getCards = createAppAsyncThunk<any,any>(
+const getCards = createAppAsyncThunk<GetCardsResponseType,CardsParamsType>(
     "cards/getCards",
     async(params,thunkAPI)=>{
         return thunkTryCatch(thunkAPI, async()=>{
@@ -35,11 +35,15 @@ const slice = createSlice({
         pageCount: 7,
     } as CardsParamsType
   },
-  reducers: {},
+  reducers: {
+    setParams: (state, action: PayloadAction<CardsParamsType>) => {
+      state.params = action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder
     .addCase(getCards.fulfilled, (state,action)=>{
-        state.cards = action.payload
+      return state = { ...state, ...action.payload }
     })
   },
 })

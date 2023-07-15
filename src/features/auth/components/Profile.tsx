@@ -26,6 +26,7 @@ export const Profile = () => {
   const showPacks = () => {
     navigate(path.PACKS)
   }
+  
   const paperStyle = {
     padding: 33,
     minHeight: "55vh",
@@ -49,6 +50,7 @@ export const Profile = () => {
             variant="text"
             startIcon={<ArrowBackIcon />}
           />
+       
           <Typography variant="h1" textAlign={"center"}>
             Personal Information
           </Typography>

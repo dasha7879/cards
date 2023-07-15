@@ -42,7 +42,6 @@ export const PacksPagination: React.FC<PacksPaginationPropsType> = ({}) => {
         <Pagination
           page={currentPage}
           onChange={onChangeCurrentPage}
-          // defaultPage={1}
           count={cardPacksTotalCount}
           shape="rounded"
           sx={{ marginTop: 3 }}
@@ -67,7 +66,6 @@ export const PacksPagination: React.FC<PacksPaginationPropsType> = ({}) => {
             sx={{ height: "30px" }}
           >
             <MenuItem value={pageCount}>{pageCount}</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
           </Select>
           <FormHelperText>Cards per Page</FormHelperText>
         </FormControl>
