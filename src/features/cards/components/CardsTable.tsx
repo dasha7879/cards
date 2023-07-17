@@ -6,8 +6,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
-import { useEffect } from "react"
-import { IconButton, styled } from "@mui/material"
+import { IconButton,SelectChangeEvent, styled } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../../../common/hooks"
 
 import SwapVertSharpIcon from "@mui/icons-material/SwapVertSharp"
@@ -30,10 +29,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export const CardsTable = () => {
   const params = useAppSelector((state) => state.cards.params)
   const cards = useAppSelector((state) => state.cards.cards)
-  console.log(cards); 
-  
-  
-
   const dispatch = useAppDispatch()
 
   const onClickSort = (name: string) => {
@@ -69,8 +64,7 @@ export const CardsTable = () => {
       }),
     )
   }
-
-  
+ 
 
   const columns = ["Question", "Answer", "Last Updated", "Grade"]
 

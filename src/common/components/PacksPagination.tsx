@@ -15,11 +15,16 @@ export const PacksPagination: React.FC<PacksPaginationPropsType> = ({}) => {
   const { page, pageCount, cardPacksTotalCount, params } = state
   const dispatch = useAppDispatch()
 
-  let commonPagesCount =  Math.ceil(cardPacksTotalCount/4)
+
   const [pageCountSelect, setPage] = useState<number>(pageCount)
   const [currentPage, setCurrentPage] = useState<number>(1)
 
+  let commonPagesCount =  Math.ceil(cardPacksTotalCount/pageCountSelect)
+
+
   const handleChange = (event: SelectChangeEvent) => {
+    dispatch(dataActions.setParams({ ...params, pageCount: event.target.value }))
+    dispatch(dataThunks.getData({ ...params, pageCount: event.target.value }))
     setPage(Number(event.target.value))
   }
   const onChangeCurrentPage = (
@@ -66,7 +71,9 @@ export const PacksPagination: React.FC<PacksPaginationPropsType> = ({}) => {
             inputProps={{ "aria-label": "Without label" }}
             sx={{ height: "30px" }}
           >
-            <MenuItem value={pageCount}>{pageCount}</MenuItem>
+            <MenuItem value={4}>{4}</MenuItem>
+            <MenuItem value={10}>{10}</MenuItem>
+            <MenuItem value={20}>{20}</MenuItem>
           </Select>
           <FormHelperText>Cards per Page</FormHelperText>
         </FormControl>
