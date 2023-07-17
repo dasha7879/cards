@@ -23,7 +23,7 @@ export const SearchInput: FC<PropsType> = ({ fullWidth }) => {
 
 
   return (
-    <Box marginTop={"20px"}>
+    <Box marginTop={"20px"} marginBottom={"20px"}>
       <TextField
         onChange={_.debounce(saveChanges, 500)}
         label="Search"

@@ -15,6 +15,7 @@ export const PacksPagination: React.FC<PacksPaginationPropsType> = ({}) => {
   const { page, pageCount, cardPacksTotalCount, params } = state
   const dispatch = useAppDispatch()
 
+  let commonPagesCount =  Math.ceil(cardPacksTotalCount/4)
   const [pageCountSelect, setPage] = useState<number>(pageCount)
   const [currentPage, setCurrentPage] = useState<number>(1)
 
@@ -42,7 +43,7 @@ export const PacksPagination: React.FC<PacksPaginationPropsType> = ({}) => {
         <Pagination
           page={currentPage}
           onChange={onChangeCurrentPage}
-          count={cardPacksTotalCount}
+          count={commonPagesCount}
           shape="rounded"
           sx={{ marginTop: 3 }}
           color="primary"

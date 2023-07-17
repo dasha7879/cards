@@ -8,11 +8,11 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import { useEffect } from "react"
 import { IconButton, styled } from "@mui/material"
-import { PacksPagination } from "../../../common/components/PacksPagination"
 import { useAppDispatch, useAppSelector } from "../../../common/hooks"
 
 import SwapVertSharpIcon from "@mui/icons-material/SwapVertSharp"
-import { cardsThunks } from "../cards.slice"
+import { cardsActions, cardsThunks } from "../cards.slice"
+import { CardsPagintaion } from "../../../common/components/CardsPagintaion"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,39 +36,39 @@ export const CardsTable = () => {
 
   const dispatch = useAppDispatch()
 
-  // const onClickSort = (name: string) => {
-  //   // to CamelCase
-  //   const currentType = params.sortPacks?.[0]
-  //   const currentName = params.sortPacks?.slice(1)
+  const onClickSort = (name: string) => {
+    // to CamelCase
+    const currentType = params.sortCards?.[0]
+    const currentName = params.sortCards?.slice(1)
 
-  //   name = name
-  //     .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-  //       return index === 0 ? word.toLowerCase() : word.toUpperCase()
-  //     })
-  //     .replace(/\s+/g, "")
+    name = name
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase()
+      })
+      .replace(/\s+/g, "")
 
-  //   let sort
+    let sort
 
-  //   if (currentName === name) {
-  //     sort = `${currentType == "0" ? 1 : 0}${name}`
-  //   } else {
-  //     sort = `${0}${name}`
-  //   }
+    if (currentName === name) {
+      sort = `${currentType == "0" ? 1 : 0}${name}`
+    } else {
+      sort = `${0}${name}`
+    }
 
-  //   dispatch(
-  //     dataActions.setParams({
-  //       ...params,
-  //       sortPacks: sort,
-  //     }),
-  //   )
+    dispatch(
+      cardsActions.setParams({
+        ...params,
+        sortCards: sort,
+      }),
+    )
 
-  //   dispatch(
-  //     dataThunks.getData({
-  //       ...params,
-  //       sortPacks: sort,
-  //     }),
-  //   )
-  // }
+    dispatch(
+      cardsThunks.getCards({
+        ...params,
+        sortCards: sort,
+      }),
+    )
+  }
 
   
 
@@ -84,11 +84,11 @@ export const CardsTable = () => {
                 {columns.map((column, index) => (
                   <StyledTableCell key={columns[index]}>
                     {column}
-                    {column !== "Actions" ? (
+                    {column !== "Question"&& column !==  "Answer" ? (
                       <IconButton
                         aria-label="sort"
                         size="small"
-                        onClick={() =>{}}
+                        onClick={()=>onClickSort(column)}
                       >
                         <SwapVertSharpIcon />
                       </IconButton>
@@ -107,13 +107,6 @@ export const CardsTable = () => {
                     <TableCell>{card.answer}</TableCell>
                     <TableCell>{card.updated}</TableCell>
                     <TableCell>{card.grade}</TableCell>
-                    {/* <TableCell>
-                      <ActionButtons
-                        onClickDelete={() => {}}
-                        onClickEdit={() =>{}}
-                        onClickShowCards={() =>{}}
-                      />
-                    </TableCell> */}
                   </TableRow>
                 )
               })}
@@ -121,7 +114,7 @@ export const CardsTable = () => {
           </Table>
         </TableContainer>
       </Paper>
-      <PacksPagination />
+      <CardsPagintaion />
     </>
   )
 }

@@ -16,7 +16,7 @@ import { dataSelector } from "../packsSelector"
 import SwapVertSharpIcon from "@mui/icons-material/SwapVertSharp"
 import { path } from "../../../common/routes/paths"
 import { useNavigate } from "react-router-dom"
-import { cardsThunks } from "../../cards/cards.slice"
+import { cardsActions, cardsThunks } from "../../cards/cards.slice"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,12 +35,9 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
   const data = useAppSelector(dataSelector)
   const user = useAppSelector((state) => state.auth.profile)
   const params = useAppSelector((state) => state.data.params)
-  // const cardPacksTotalCount = useAppSelector(
-  //   (state) => state.data.cardPacksTotalCount,
-  // )
+
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-
 
   useEffect(() => {
     dispatch(dataThunks.getData(params))
@@ -54,8 +51,10 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
     dispatch(dataThunks.upDatePack({ _id, name }))
   }
 
-  const onClickShowCards = (cardsPack_id:string) => {
-    dispatch(cardsThunks.getCards({cardsPack_id}))
+  const onClickShowCards = (cardsPack_id: string) => {
+    // мне нужна айдишка пака , а не отдельной карточки
+    dispatch(cardsActions.setParams({ cardsPack_id }))
+    dispatch(cardsThunks.getCards({ cardsPack_id }))
     navigate(path.CARDS)
   }
 
@@ -132,7 +131,7 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
                       <ActionButtons
                         onClickDelete={() => onClickDelete(pack._id)}
                         onClickEdit={() => onClickEdit(pack._id, "newName")}
-                        onClickShowCards={()=>onClickShowCards(pack._id)}
+                        onClickShowCards={() => onClickShowCards(pack._id)}
                       />
                     </TableCell>
                   </TableRow>

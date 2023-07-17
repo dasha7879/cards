@@ -48,5 +48,6 @@ const slice = createSlice({
   },
 })
 
+export const cardsActions = slice.actions
 export const cardsReducer = slice.reducer
 export const cardsThunks = {getCards}
