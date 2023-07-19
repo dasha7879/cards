@@ -53,6 +53,7 @@ export const CardsPagintaion = () => {
         }}
       >
         <Pagination
+        
           page={currentPage}
           onChange={onChangeCurrentPage}
           count={CommonPagesCount}

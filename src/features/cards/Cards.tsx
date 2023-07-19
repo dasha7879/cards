@@ -10,8 +10,6 @@ import { useAppSelector } from "../../common/hooks"
 
 export const Cards = () => {
   const navigate = useNavigate()
-//   const pack= useAppSelector((state)=>state.data.cardPacks)
-//   const name = pack.filter(p=>p)
 
   const onClickPacks = () => {
     navigate(path.PACKS)
@@ -27,7 +25,7 @@ export const Cards = () => {
         onClick={onClickPacks}
       />
       <PackNavigator title={"Cards list"} buttonText={"Learn pack"} />
-      <SearchInput fullWidth/>
+      <SearchInput fullWidth cards />
       <CardsTable />
     </Container>
   )
