@@ -11,7 +11,6 @@ import { cardsActions, cardsThunks } from "../../features/cards/cards.slice"
 export const CardsPagintaion = () => {
   const state = useAppSelector((state) => state.cards)
   const { page, pageCount, params, cardsTotalCount } = state
-  console.log(pageCount)
 
   const dispatch = useAppDispatch()
 
@@ -23,7 +22,6 @@ export const CardsPagintaion = () => {
 
     dispatch(cardsActions.setParams({ ...params, page: newPage }))
     dispatch(cardsThunks.getCards({ ...params, page: newPage }))
-    console.log(newPage)
   }
 
   const handleChange = (event: SelectChangeEvent) => {

@@ -14,21 +14,30 @@ export type PacksPaginationPropsType = {
 
 export const PacksPagination: React.FC<PacksPaginationPropsType> = ({}) => {
   const state = useAppSelector((state) => state.data)
-  const { page, pageCount, cardPacksTotalCount, params} = state
- 
-  const dispatch = useAppDispatch()
+  const { page, pageCount, cardPacksTotalCount, params } = state
+  const { filter } = params
 
+  const dispatch = useAppDispatch()
 
   const [pageCountSelect, setPage] = useState<number>(pageCount)
   const [currentPage, setCurrentPage] = useState<number>(1)
 
-  let commonPagesCount =  Math.ceil(cardPacksTotalCount/pageCountSelect)
+  let commonPagesCount = Math.ceil(cardPacksTotalCount / pageCountSelect)
+
+  useEffect(() => {
+    if (filter) {
+      setPage(4)
+    }
+  }, [filter])
+
 
 
   const handleChange = (event: SelectChangeEvent) => {
-      dispatch(dataActions.setParams({ ...params, pageCount: event.target.value }))
-      dispatch(dataThunks.getData({ ...params, pageCount: event.target.value }))
-      setPage(Number(event.target.value))
+    dispatch(
+      dataActions.setParams({ ...params, pageCount: event.target.value, filter:false }),
+    )
+    dispatch(dataThunks.getData({ ...params, pageCount: event.target.value, filter:false}))
+    setPage(Number(event.target.value))
   }
   const onChangeCurrentPage = (
     event: ChangeEvent<unknown>,

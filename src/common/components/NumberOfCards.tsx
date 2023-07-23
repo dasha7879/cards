@@ -32,7 +32,6 @@ export const NumberOfCards: React.FC<NumberOfCardsType> = ({}) => {
   }
 
   useEffect(() => {
-    console.log("lala")
     dispatch(
       dataActions.setParams({
         ...params,

@@ -6,17 +6,17 @@ import DeleteIcon from "@mui/icons-material/Delete"
 export type ActionButtonsPropsType = {
   onClickDelete: () => void
   onClickEdit: () => void
-  onClickShowCards: () => void
+  // onClickShowCards: () => void
 }
 
 export const ActionButtons: React.FC<ActionButtonsPropsType> = ({
   onClickDelete,
   onClickEdit,
-  onClickShowCards
+  // onClickShowCards
 }) => {
   return (
     <>
-      <IconButton aria-label="learn" onClick={onClickShowCards}>
+      <IconButton aria-label="learn" >
         <SchoolIcon />
       </IconButton>
       <IconButton aria-label="edit" onClick={onClickEdit}>

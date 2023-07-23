@@ -36,6 +36,8 @@ export type paramsType = {
   pageCount?: string
   user_id?: string
   block?: boolean
+  filter?: boolean
+  packId?:string
 }
 
 export type PackType = {

@@ -6,7 +6,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
-import { useEffect } from "react"
+import { MouseEventHandler, useEffect } from "react"
 import { IconButton, styled } from "@mui/material"
 import { PacksPagination } from "../../../common/components/PacksPagination"
 import { ActionButtons } from "../../../common/components/ActionButtons"
@@ -51,9 +51,9 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
     dispatch(dataThunks.upDatePack({ _id, name }))
   }
 
-  const onClickShowCards = (cardsPack_id: string) => {
-    // мне нужна айдишка пака , а не отдельной карточки
-    dispatch(cardsActions.setParams({ cardsPack_id }))
+  const onClickShowCards = ( cardsPack_id: string, packName: string) => {
+    dispatch(dataActions.setParams({packName}))
+    dispatch(cardsActions.setParams( {cardsPack_id} ))
     dispatch(cardsThunks.getCards({ cardsPack_id }))
     navigate(path.CARDS)
   }
@@ -120,23 +120,29 @@ export const PacksTable: React.FC<PacksTablePropsType> = ({}) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.cardPacks?.map((pack) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={pack._id}>
-                    <TableCell>{pack.name}</TableCell>
-                    <TableCell>{pack.cardsCount}</TableCell>
-                    <TableCell>{pack.updated}</TableCell>
-                    <TableCell>{pack.created}</TableCell>
-                    <TableCell>
-                      <ActionButtons
-                        onClickDelete={() => onClickDelete(pack._id)}
-                        onClickEdit={() => onClickEdit(pack._id, "newName")}
-                        onClickShowCards={() => onClickShowCards(pack._id)}
-                      />
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
+              {data.cardPacks.length > 0
+                ? data.cardPacks?.map((pack) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={pack._id}
+                      >
+                        <TableCell onClick={()=> onClickShowCards(pack._id, pack.name)}>{pack.name}</TableCell>
+                        <TableCell>{pack.cardsCount}</TableCell>
+                        <TableCell>{pack.updated}</TableCell>
+                        <TableCell>{pack.created}</TableCell>
+                        <TableCell>
+                          <ActionButtons
+                            onClickDelete={() => onClickDelete(pack._id)}
+                            onClickEdit={() => onClickEdit(pack._id, "newName")}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })
+                : "not found"}
             </TableBody>
           </Table>
         </TableContainer>

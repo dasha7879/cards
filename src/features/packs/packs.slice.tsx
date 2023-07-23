@@ -26,7 +26,6 @@ const addPack = createAppAsyncThunk<PackType, ArgNewCardsPackType>(
   async (cardsPack, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       const res = await packsAPI.addPack(cardsPack)
-      console.log(res)
       return res.data.newCardsPack
     })
   },
@@ -37,7 +36,6 @@ const deletePack = createAppAsyncThunk<PackType, idPackType>(
   async (params, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       const res = await packsAPI.deletePack(params)
-      console.log(res.data)
       return res.data.deletedCardsPack
     })
   },
@@ -48,7 +46,6 @@ const upDatePack = createAppAsyncThunk<PackType, updatePackType>(
   async (cardsPack, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       const res = await packsAPI.upDatePack(cardsPack)
-      console.log(res.data.updatedCardsPack)
 
       return res.data.updatedCardsPack
     })
@@ -73,6 +70,8 @@ const slice = createSlice({
       pageCount: "",
       user_id: "",
       block: false,
+      filter:false,
+      packId: ""
     } as paramsType,
   },
   reducers: {

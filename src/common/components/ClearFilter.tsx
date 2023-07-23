@@ -41,6 +41,7 @@ export const ClearFilter: React.FC<ClearFilterPropsType> = memo(
           pageCount:'4',
           user_id: undefined,
           block: undefined,
+          filter: true
         }),
       )
 
@@ -55,6 +56,7 @@ export const ClearFilter: React.FC<ClearFilterPropsType> = memo(
           pageCount: '4',
           user_id: undefined,
           block: undefined,
+          filter: true
         }),
       )
     }

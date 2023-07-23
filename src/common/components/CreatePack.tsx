@@ -47,7 +47,6 @@ export const CreatePack: React.FC<CreatePackType> = ({}) => {
 
   const onSubmit = (data: FormData) => {
     CreateNewPack(data)
-    console.log(data)
   }
 
   return (
