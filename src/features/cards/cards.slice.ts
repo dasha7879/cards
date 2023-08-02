@@ -1,6 +1,6 @@
 import { thunkTryCatch } from './../../common/utils/thunkTryCatch';
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { CardType, CardsParamsType, GetCardsResponseType, cardsAPI } from "./cards.api"
+import { ArgNewCardsType, CardType, CardsParamsType, CommonResponseCardsType, GetCardsResponseType, cardsAPI } from "./cards.api"
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk"
 
 const getCards = createAppAsyncThunk<GetCardsResponseType,CardsParamsType>(
@@ -9,6 +9,15 @@ const getCards = createAppAsyncThunk<GetCardsResponseType,CardsParamsType>(
         return thunkTryCatch(thunkAPI, async()=>{
             const res = await cardsAPI.getCards(params)
             return res.data
+        })
+    }
+)
+const addCard = createAppAsyncThunk<CommonResponseCardsType,ArgNewCardsType>(
+    "cards/addCard",
+    async(cards,thunkAPI)=>{
+        return thunkTryCatch(thunkAPI, async()=>{
+            const res = await cardsAPI.addCard(cards)
+            return res.data.newCard
         })
     }
 )
@@ -45,9 +54,12 @@ const slice = createSlice({
     .addCase(getCards.fulfilled, (state,action)=>{
       return state = { ...state, ...action.payload }
     })
+    .addCase(addCard.fulfilled,(state,action)=>{
+    state.cards.unshift(action.payload.newCard)
+    })
   },
 })
 
 export const cardsActions = slice.actions
 export const cardsReducer = slice.reducer
-export const cardsThunks = {getCards}
+export const cardsThunks = {getCards, addCard}

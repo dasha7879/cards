@@ -62,7 +62,7 @@ export type CardType = {
   __v: number
 }
 
-type ArgNewCardsType = {
+export type ArgNewCardsType = {
   cardsPack_id: string
   question: string
   answer: string

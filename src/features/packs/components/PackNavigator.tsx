@@ -19,6 +19,11 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
   const onclickHandler = () => {
     dispatch(dataThunks.addPack({ name: "NewFolder" }))
   }
+  const onclickHandlerCard = () => {
+    // dispatch(dataThunks.addPack({ name: "NewFolder" }))
+    console.log('new Card');
+    
+  }
 
   return (
     <Box
@@ -33,7 +38,9 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
         {title}
       </Typography>
       <SuperButton
-        onClick={onclickHandler}
+        onClick={
+          buttonText === "Add new Card" ? onclickHandlerCard : onclickHandler
+        }
         text={buttonText}
         borderRadius="30px"
         width="175"

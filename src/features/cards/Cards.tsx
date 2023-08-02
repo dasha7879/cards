@@ -42,7 +42,7 @@ export const Cards = () => {
       />
       <PackNavigator
         title={"Cards list: " + packName}
-        buttonText={"Learn pack"}
+        buttonText={"Add new Card"}
       />
       <SearchInput fullWidth cards />
       <CardsTable />
