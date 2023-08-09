@@ -4,6 +4,8 @@ import { useState } from "react"
 import { useAppDispatch } from "../../../common/hooks"
 import { dataThunks } from "../packs.slice"
 import { SuperButton } from "../../../common/components/SuperButton"
+import { path } from "../../../common/routes/paths"
+import { useNavigate } from "react-router-dom"
 
 type PackNavigatorType = {
   title: string
@@ -14,15 +16,13 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
   buttonText,
 }) => {
   const dispatch = useAppDispatch()
-  const [disabled, setDisabled] = useState<boolean>(false)
+  const navigate = useNavigate()
+
+  const [disabled, setDisabled] = useState<boolean>(true)
 
   const onclickHandler = () => {
-    dispatch(dataThunks.addPack({ name: "NewFolder" }))
-  }
-  const onclickHandlerCard = () => {
+    setDisabled(false)
     // dispatch(dataThunks.addPack({ name: "NewFolder" }))
-    console.log('new Card');
-    
   }
 
   return (
@@ -38,9 +38,7 @@ export const PackNavigator: React.FC<PackNavigatorType> = ({
         {title}
       </Typography>
       <SuperButton
-        onClick={
-          buttonText === "Add new Card" ? onclickHandlerCard : onclickHandler
-        }
+        onClick={onclickHandler}
         text={buttonText}
         borderRadius="30px"
         width="175"

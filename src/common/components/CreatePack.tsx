@@ -10,7 +10,11 @@ import { useAppDispatch } from "../hooks"
 import { path } from "../routes/paths"
 import { useNavigate } from "react-router-dom"
 import { EmailInput } from "./EmailInput.tsx"
-
+import Box from "@mui/material/Box/Box"
+import IconButton from "@mui/material/IconButton/IconButton"
+import CloseIcon from "@mui/icons-material/Close"
+import Container from "@mui/material/Container/Container"
+import { Column } from "ag-grid-community"
 type CreatePackType = {}
 export type FormData = {
   namePack: string
@@ -44,13 +48,41 @@ export const CreatePack: React.FC<CreatePackType> = ({}) => {
       namePack: "",
     },
   })
+ 
 
   const onSubmit = (data: FormData) => {
     CreateNewPack(data)
   }
 
   return (
+    // <Grid container spacing={2} flex-direction>
+    //     <Grid item xs={12}  direction={"row-reverse"}>
+    //       <div>xs=1</div>
+    //     </Grid>
+    //     <Grid item xs={12}>
+    //       <div>xs=2</div>
+    //     </Grid>
+    //     <Grid item xs={12}>
+    //       <div>xs=3</div>
+    //     </Grid>
+    //     <Grid item xs={12}>
+    //       <div>xs=4</div>
+    //     </Grid>
+    //     <Grid item xs={12}>
+    //       <div>xs=5</div>
+    //     </Grid>
+    //     <Grid item xs={6}>
+    //       <div>xs=6</div>
+    //     </Grid>
+    //     <Grid item xs={6}>
+    //       <div>xs=7</div>
+    //     </Grid>
+    //   </Grid>
     <Paper elevation={5} style={paperStyle}>
+      <Grid container>
+      <IconButton aria-label="close">
+        <CloseIcon />
+      </IconButton>
       <Typography variant="h1" textAlign={"center"}>
         Create a new Pack
       </Typography>
@@ -79,6 +111,7 @@ export const CreatePack: React.FC<CreatePackType> = ({}) => {
           />
         </Stack>
       </form>
+      </Grid>
     </Paper>
   )
 }
